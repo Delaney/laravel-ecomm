@@ -30,3 +30,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout', 'Site\CheckoutController@getCheckout')->name('checkout.index');
     Route::post('/checkout/order', 'Site\CheckoutController@placeOrder')->name('checkout.place.order');
 });
+
+Route::get('/category/{slug}', 'Site\CategoryController@show')->name('category.show');
