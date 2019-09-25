@@ -32,3 +32,13 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/category/{slug}', 'Site\CategoryController@show')->name('category.show');
+
+Route::get('account/orders', 'Site\AccountController@getOrders')->name('account.orders');
+
+
+
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+
+Route::get('checkout/payment/complete', 'Site\CheckoutController@complete')->name('checkout.payment.complete');
