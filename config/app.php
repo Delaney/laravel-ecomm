@@ -177,6 +177,7 @@ return [
 		App\Providers\SettingServiceProvider::class,
 		App\Providers\SettingServiceProvider::class,
 		App\Providers\ViewComposerServiceProvider::class,
+		App\Providers\RepositoryServiceProvider::class,
 
     ],
 
