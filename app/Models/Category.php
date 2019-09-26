@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 use TypiCMS\NestableTrait;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
