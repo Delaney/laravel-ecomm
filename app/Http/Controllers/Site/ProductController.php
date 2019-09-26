@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Site;
 
+use Cart;
 use Illuminate\Http\Request;
 use App\Contracts\ProductContract;
 use App\Http\Controllers\Controller;
+use App\Contracts\AttributeContract;
 
 class ProductController extends Controller
 {

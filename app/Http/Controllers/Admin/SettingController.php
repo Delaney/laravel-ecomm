@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Setting;
+use App\Traits\UploadAble;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\BaseController;
-
-use UploadAble;
 
 class SettingController extends BaseController
 {

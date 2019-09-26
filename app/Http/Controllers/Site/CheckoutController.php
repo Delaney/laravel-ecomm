@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Services\PayPalService;
 use App\Contracts\OrderContract;
 use App\Http\Controllers\Controller;
 use Paystack;
