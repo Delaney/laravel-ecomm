@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Traits\UploadAble;
+use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Contracts\ProductContract;
@@ -33,6 +34,10 @@ class ProductImageController extends Controller
 			]);
 
 			$product->images()->save($productImage);
+			if ($product->main == NULL) {
+				$product->main = $image;
+				$product->save();
+			}
 		}
 
 		return response()->json(['status' => 'Success']);
@@ -46,6 +51,17 @@ class ProductImageController extends Controller
 			$this->deleteOne($image->full);
 		}
 		$image->delete();
+
+		return redirect()->back();
+	}
+
+	public function featured($id)
+	{
+		$image = ProductImage::findOrFail($id);
+
+		$product = Product::find($image->product_id);
+		$product->main = $image->full;
+		$product->save();
 
 		return redirect()->back();
 	}

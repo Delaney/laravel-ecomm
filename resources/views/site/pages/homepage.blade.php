@@ -8,7 +8,7 @@
 			<h3 class="tittle-w3layouts my-lg-4 my-4">New Arrivals for you </h3>
 			<div class="row">
 				<!-- /womens -->
-				<div class="col-md-3 product-men women_two">
+				<!-- <div class="col-md-3 product-men women_two">
 					<div class="product-googles-info googles">
 						<div class="men-pro-item">
 							<div class="men-thumb-item">
@@ -143,53 +143,58 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-3 product-men women_two">
-					<div class="product-googles-info googles">
-						<div class="men-pro-item">
-							<div class="men-thumb-item">
-								<img src="{{ asset('frontend/images/s4.jpeg') }}" class="img-fluid" alt="">
-								<div class="men-cart-pro">
-									<div class="inner-men-cart-pro">
-										<a href="single.php" class="link-product-add-cart">Details</a>
-									</div>
-								</div>
-								<span class="product-new-top">New</span>
-							</div>
-							<div class="item-info-product">
+				</div>				 -->
 
-								<div class="info-product-price">
-									<div class="grid_meta">
-										<div class="product_price">
-											<h4>
-												<a href="single.php">Bola Dress </a>
-											</h4>
-											<div class="grid-price mt-2">
-												<span class="money ">NGN325.00</span>
-											</div>
+				@for ($i = 0; $i < 4; $i++)
+					<div class="col-md-3 product-men women_two">
+						<div class="product-googles-info googles">
+							<div class="men-pro-item">
+								<div class="men-thumb-item">
+									@if ($products[$i]->main == NULL)
+									<img src="{{ asset('default/product.png') }}" class="img-fluid" alt="">
+									@else
+									<img src="{{ asset('storage/'.$products[$i]->main) }}" class="img-fluid" alt="">
+									@endif
+									<div class="men-cart-pro">
+										<div class="inner-men-cart-pro">
+											<a href="single.php" class="link-product-add-cart">Details</a>
 										</div>
-										
 									</div>
-									<div class="googles single-item hvr-outline-out">
-										<form action="#" method="post">
-											<input type="hidden" name="cmd" value="_cart">
-											<input type="hidden" name="add" value="1">
-											<input type="hidden" name="googles_item" value="Farenheit Oval">
-											<input type="hidden" name="amount" value="325.00">
-											<button type="submit" class="googles-cart pgoogles-cart">
-												<i class="fas fa-cart-plus"></i>
-											</button>
-
-											
-										</form>
-
-									</div>
+									<span class="product-new-top">New</span>
 								</div>
-								<div class="clearfix"></div>
+								<div class="item-info-product">
+
+									<div class="info-product-price">
+										<div class="grid_meta">
+											<div class="product_price">
+												<h4>
+													<a href="single.php">{{ $products[$i]->name }}</a>
+												</h4>
+												<div class="grid-price mt-2">
+													<span class="money ">{{ config('settings.currency_symbol') }}{{ $products[$i]->price }}</span>
+												</div>
+											</div>
+											
+										</div>
+										<div class="googles single-item hvr-outline-out">
+											<form action="#" method="post">
+												<input type="hidden" name="cmd" value="_cart">
+												<input type="hidden" name="add" value="1">
+												<input type="hidden" name="googles_item" value="Farenheit Oval">
+												<input type="hidden" name="amount" value="325.00">
+												<button type="submit" class="googles-cart pgoogles-cart">
+													<i class="fas fa-cart-plus"></i>
+												</button>
+											</form>
+
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				@endfor
 			</div>
 			<!-- //womens -->
 			<!-- /mens -->

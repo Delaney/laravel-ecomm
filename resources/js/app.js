@@ -53,10 +53,9 @@ Vue.use(VueSwal);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('attribute-values', require('./components/AttributeValues.vue').default);
+Vue.component('product-attributes', require('./components/ProductAttributes').default);
 
 const app = new Vue({
     el: '#app'
 });
-
-Vue.component('attribute-values', require('./components/AttributeValues.vue').default);
-Vue.component('product-attributes', require('./components/ProductAttributes').default);

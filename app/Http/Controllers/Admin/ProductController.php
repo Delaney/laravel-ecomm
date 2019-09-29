@@ -50,10 +50,6 @@ class ProductController extends BaseController
 
 	public function store(Request $request)
 	{
-		// return Response::json([
-		// 	'status' => $request
-		// ], 200);
-
 		$params = $request->except('_token');
 
 		$product = $this->productRepository->createProduct($params);
@@ -74,7 +70,7 @@ class ProductController extends BaseController
 		return view('admin.products.edit', compact('categories', 'brands', 'product'));
 	}
 
-	public function update(StoreProductFormRequest $request)
+	public function update(Request $request)
 	{
 		$params = $request->except('_token');
 

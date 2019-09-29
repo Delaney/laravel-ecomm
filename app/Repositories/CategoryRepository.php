@@ -140,7 +140,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
     public function treeList()
     {
 		return Category::orderByRaw('-name ASC')
-			->whereNotIn('id', array(1))
+			// ->whereNotIn('id', array(1))
             ->get()
             ->nest()
             ->setIndent('|–– ')

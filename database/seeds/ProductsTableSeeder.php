@@ -47,7 +47,7 @@ class ProductsTableSeeder extends Seeder
 		Product::create([
 			'brand_id'		=>	1,
 			'sku'			=>	'001-001-0004',
-			'name'          =>	'ola Dress',
+			'name'          =>	'Ola Dress',
 			'slug'			=>	'ola-dress',
 			'quantity'		=>	1,
 			'price'			=>	strval($price),

@@ -15,7 +15,7 @@ require 'admin.php';
 
 Auth::routes();
 
-Route::view('/', 'site.pages.homepage');
+Route::get('/', 'Site\HomeController@index')->name('home');
 
 Route::get('/product/{slug}', 'Site\ProductController@show')->name('product.show');
 

@@ -3,7 +3,7 @@
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/js/plugins/dropzone/dist/min/dropzone.min.css') }}"/>
 @endsection
-=@section('content')
+@section('content')
     <div class="app-title">
         <div>
             <h1><i class="fa fa-shopping-bag"></i> {{ $pageTitle }} - {{ $subTitle }}</h1>
@@ -224,6 +224,9 @@
 										<div class="card">
 											<div class="card-body">
 												<img src="{{ asset('storage/'.$image->full) }}" id="brandLogo" class="img-fluid" alt="img">
+												<a class="card-link float-right text-danger" href="{{ route('admin.products.images.featured', $image->id) }}">
+													<i class="fa fa-fw fa-lg fa-star"></i>
+												</a>
 												<a class="card-link float-right text-danger" href="{{ route('admin.products.images.delete', $image->id) }}">
 													<i class="fa fa-fw fa-lg fa-trash"></i>
 												</a>

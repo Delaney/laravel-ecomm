@@ -67,6 +67,7 @@ Route::group(['prefix'  =>  'admin'], function () {
 
 		Route::post('images/upload', 'Admin\ProductImageController@upload')->name('admin.products.images.upload');
 		Route::get('images/{id}/delete', 'Admin\ProductImageController@delete')->name('admin.products.images.delete');
+		Route::get('images/{id}/featured', 'Admin\ProductImageController@featured')->name('admin.products.images.featured');
 
 		// Load attributes on the page load
 		Route::get('attributes/load', 'Admin\ProductAttributeController@loadAttributes');
