@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 
 class ProductAttributeController extends Controller
 {
+	public function __construct()
+	{
+		$this->middleware('auth:admin');
+	}
     /**
      * @return \Illuminate\Http\JsonResponse
      */

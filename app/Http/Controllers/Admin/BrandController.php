@@ -19,6 +19,7 @@ class BrandController extends BaseController
      */
     public function __construct(BrandContract $brandRepository)
     {
+		$this->middleware('auth:admin');
         $this->brandRepository = $brandRepository;
 	}
 	

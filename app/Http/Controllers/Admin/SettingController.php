@@ -10,6 +10,10 @@ use App\Http\Controllers\BaseController;
 
 class SettingController extends BaseController
 {
+	public function __construct()
+	{
+		$this->middleware('auth:admin');
+	}
 	
 	/**
 	* @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

@@ -16,7 +16,7 @@
                     <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="name">Name <span class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" id="name" value="{{ old('name') }}"/>
+                            <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" id="name" value="{{ old('name') }}" required/>
                             @error('name') {{ $message }} @enderror
                         </div>
                         <div class="form-group">
@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
 							<label for="parent">Parent Category <span class="m-l-5 text-danger"> *</span></label>
-							<select id=parent class="form-control custom-select mt-15 @error('parent_id') is-invalid @enderror" name="parent_id">
+							<select id=parent class="form-control custom-select mt-15 @error('parent_id') is-invalid @enderror" name="parent_id" required default="1">
 								<option value="0">Select a parent category</option>
 								@foreach($categories as $key => $category)
 									<option value="{{ $key }}"> {{ $category }} </option>

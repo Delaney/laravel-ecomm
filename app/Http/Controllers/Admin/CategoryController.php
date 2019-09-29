@@ -23,6 +23,7 @@ class CategoryController extends BaseController
      */
     public function __construct(CategoryContract $categoryRepository)
     {
+		$this->middleware('auth:admin');
         $this->categoryRepository = $categoryRepository;
     }
 

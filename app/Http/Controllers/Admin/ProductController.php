@@ -9,6 +9,8 @@ use App\Contracts\ProductContract;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\StoreProductFormRequest;
 
+use Response;
+
 class ProductController extends BaseController
 {
     protected $brandRepository;
@@ -23,6 +25,7 @@ class ProductController extends BaseController
         ProductContract $productRepository
     )
     {
+		$this->middleware('auth:admin');
         $this->brandRepository = $brandRepository;
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
@@ -45,8 +48,12 @@ class ProductController extends BaseController
 		return view('admin.products.create', compact('categories', 'brands'));
 	}
 
-	public function store(StoreProductFormRequest $request)
+	public function store(Request $request)
 	{
+		// return Response::json([
+		// 	'status' => $request
+		// ], 200);
+
 		$params = $request->except('_token');
 
 		$product = $this->productRepository->createProduct($params);

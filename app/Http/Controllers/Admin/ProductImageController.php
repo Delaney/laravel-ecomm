@@ -16,6 +16,7 @@ class ProductImageController extends Controller
 
     public function __construct(ProductContract $productRepository)
     {
+		$this->middleware('auth:admin');
         $this->productRepository = $productRepository;
 	}
 	

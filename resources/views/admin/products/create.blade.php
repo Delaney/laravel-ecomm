@@ -25,7 +25,7 @@
                             <hr>
                             <div class="tile-body">
                                 <div class="form-group">
-                                    <label class="control-label" for="name">Name</label>
+                                    <label class="control-label" for="name">Name <span class="text-danger">*</span></label>
                                     <input
                                         class="form-control @error('name') is-invalid @enderror"
                                         type="text"
@@ -33,6 +33,7 @@
                                         id="name"
                                         name="name"
                                         value="{{ old('name') }}"
+										required
                                     />
                                     <div class="invalid-feedback active">
                                         <i class="fa fa-exclamation-circle fa-fw"></i> @error('name') <span>{{ $message }}</span> @enderror
@@ -41,7 +42,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label" for="sku">SKU</label>
+                                            <label class="control-label" for="sku">SKU <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control @error('sku') is-invalid @enderror"
                                                 type="text"
@@ -49,6 +50,7 @@
                                                 id="sku"
                                                 name="sku"
                                                 value="{{ old('sku') }}"
+												required
                                             />
                                             <div class="invalid-feedback active">
                                                 <i class="fa fa-exclamation-circle fa-fw"></i> @error('sku') <span>{{ $message }}</span> @enderror
@@ -57,8 +59,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label" for="brand_id">Brand</label>
-                                            <select name="brand_id" id="brand_id" class="form-control @error('brand_id') is-invalid @enderror">
+                                            <label class="control-label" for="brand_id">Brand <span class="text-danger">*</span></label>
+                                            <select name="brand_id" id="brand_id" class="form-control @error('brand_id') is-invalid @enderror" required default="1">
                                                 <option value="0">Select a brand</option>
                                                 @foreach($brands as $brand)
                                                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -73,8 +75,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="control-label" for="categories">Categories</label>
-                                            <select name="categories[]" id="categories" class="form-control" multiple>
+                                            <label class="control-label" for="categories">Categories <span class="text-danger">*</span></label>
+                                            <select name="categories" id="categories" class="form-control" multiple required>
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                 @endforeach
@@ -85,7 +87,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label" for="price">Price</label>
+                                            <label class="control-label" for="price">Price <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control @error('price') is-invalid @enderror"
                                                 type="text"
@@ -93,6 +95,7 @@
                                                 id="price"
                                                 name="price"
                                                 value="{{ old('price') }}"
+												required
                                             />
                                             <div class="invalid-feedback active">
                                                 <i class="fa fa-exclamation-circle fa-fw"></i> @error('price') <span>{{ $message }}</span> @enderror
@@ -116,7 +119,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label" for="quantity">Quantity</label>
+                                            <label class="control-label" for="quantity">Quantity <span class="text-danger">*</span></label>
                                             <input
                                                 class="form-control @error('quantity') is-invalid @enderror"
                                                 type="number"
@@ -124,6 +127,7 @@
                                                 id="quantity"
                                                 name="quantity"
                                                 value="{{ old('quantity') }}"
+												required
                                             />
                                             <div class="invalid-feedback active">
                                                 <i class="fa fa-exclamation-circle fa-fw"></i> @error('quantity') <span>{{ $message }}</span> @enderror

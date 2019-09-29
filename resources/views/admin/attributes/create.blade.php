@@ -44,12 +44,13 @@
                                         id="name"
                                         name="name"
                                         value="{{ old('name') }}"
+										required
                                     />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="frontend_type">Frontend Type</label>
                                     @php $types = ['select' => 'Select Box', 'radio' => 'Radio Button', 'text' => 'Text Field', 'text_area' => 'Text Area']; @endphp
-                                    <select name="frontend_type" id="frontend_type" class="form-control">
+                                    <select name="frontend_type" id="frontend_type" class="form-control" required>
                                         @foreach($types as $key => $label)
                                             <option value="{{ $key }}">{{ $label }}</option>
                                         @endforeach

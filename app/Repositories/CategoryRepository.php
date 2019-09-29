@@ -17,138 +17,141 @@ use Doctrine\Instantiator\Exception\InvalidArgumentException;
  */
 class CategoryRepository extends BaseRepository implements CategoryContract
 {
-	use UploadAble;
-	
-	/**
-	 * CategoryRepository constructor.
-	 * @param Category $model
-	 */
-	public function __construct(Category $model)
-	{
-		parent::__construct($model);
-		$this->model = $model;
-	}
+    use UploadAble;
 
-	/**
-	 * @param string $order
-	 * @param string $sort
-	 * @param array $columns
-	 * @return mixed
-	 */
-	public function listCategories(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
-	{
-		return $this->all($columns, $order, $sort);
-	}
+    /**
+     * CategoryRepository constructor.
+     * @param Category $model
+     */
+    public function __construct(Category $model)
+    {
+        parent::__construct($model);
+        $this->model = $model;
+    }
 
-	/**
-	 * @param int $id
-	 * @return mixed
-	 * @throws ModelNotFoundException
-	 */
-	public function findCategoryById(int $id)
-	{
-		try {
-			return $this->findOneOrFail($id);
+    /**
+     * @param string $order
+     * @param string $sort
+     * @param array $columns
+     * @return mixed
+     */
+    public function listCategories(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
+    {
+        return $this->all($columns, $order, $sort)->whereNotIn('id', array(1));
+    }
 
-		} catch (ModelNotFoundException $e) {
+    /**
+     * @param int $id
+     * @return mixed
+     * @throws ModelNotFoundException
+     */
+    public function findCategoryById(int $id)
+    {
+        try {
+            return $this->findOneOrFail($id);
 
-			throw new ModelNotFoundException($e);
-		}
-	}
+        } catch (ModelNotFoundException $e) {
 
-	/**
-	 * @param array $params
-	 * @return Category|mixed
-	 */
-	public function createCategory(array $params)
-	{
-		try {
-			$collection = collect($params);
-			
-			$image = null;
+            throw new ModelNotFoundException($e);
+        }
 
-			if ($collection->has('image') && ($params['image'] instanceof  UploadedFile)) {
-				$image = $this->uploadOne($params['image'], 'categories');
-			}
+    }
 
-			$featured = $collection->has('featured') ? 1 : 0;
-			$menu = $collection->has('menu') ? 1 : 0;
+    /**
+     * @param array $params
+     * @return Category|mixed
+     */
+    public function createCategory(array $params)
+    {
+        try {
+            $collection = collect($params);
 
-			$merge = $collection->merge(compact('menu', 'image', 'featured'));
+            $image = null;
 
-			$category = new Category($merge->all());
+            if ($collection->has('image') && ($params['image'] instanceof  UploadedFile)) {
+                $image = $this->uploadOne($params['image'], 'categories');
+            }
 
-			$category->save();
+            $featured = $collection->has('featured') ? 1 : 0;
+            $menu = $collection->has('menu') ? 1 : 0;
 
-			return $category;
+            $merge = $collection->merge(compact('menu', 'image', 'featured'));
 
-		} catch (QueryException $exception) {
-			throw new InvalidArgumentException($exception->getMessage());
-		}
-	}
+            $category = new Category($merge->all());
 
-	/**
-	 * @param array $params
-	 * @return mixed
-	 */
-	public function updateCategory(array $params)
-	{
-		$category = $this->findCategoryById($params['id']);
+            $category->save();
 
-		$collection = collect($params)->except('_token');
+            return $category;
 
-		if ($collection->has('image') && ($params['image'] instanceof  UploadedFile)) {
+        } catch (QueryException $exception) {
+            throw new InvalidArgumentException($exception->getMessage());
+        }
+    }
 
-			if ($category->image != null) {
-				$this->deleteOne($category->image);
-			}
+    /**
+     * @param array $params
+     * @return mixed
+     */
+    public function updateCategory(array $params)
+    {
+        $category = $this->findCategoryById($params['id']);
 
-			$image = $this->uploadOne($params['image'], 'categories');
-		}
+        $collection = collect($params)->except('_token');
 
-		$featured = $collection->has('featured') ? 1 : 0;
-		$menu = $collection->has('menu') ? 1 : 0;
+        if ($collection->has('image') && ($params['image'] instanceof  UploadedFile)) {
 
-		$merge = $collection->merge(compact('menu', 'image', 'featured'));
+            if ($category->image != null) {
+                $this->deleteOne($category->image);
+            }
 
-		$category->update($merge->all());
+            $image = $this->uploadOne($params['image'], 'categories');
+        }
 
-		return $category;
-	}
+        $featured = $collection->has('featured') ? 1 : 0;
+        $menu = $collection->has('menu') ? 1 : 0;
 
-	/**
-	 * @param $id
-	 * @return bool|mixed
-	 */
-	public function deleteCategory($id)
-	{
-		$category = $this->findCategoryById($id);
+        $merge = $collection->merge(compact('menu', 'image', 'featured'));
 
-		if ($category->image != null) {
-			$this->deleteOne($category->image);
-		}
+        $category->update($merge->all());
 
-		$category->delete();
+        return $category;
+    }
 
-		return $category;
-	}
+    /**
+     * @param $id
+     * @return bool|mixed
+     */
+    public function deleteCategory($id)
+    {
+        $category = $this->findCategoryById($id);
 
-	/**
-	 * @return mixed
-	 */
-	public function treeList()
-	{
+        if ($category->image != null) {
+            $this->deleteOne($category->image);
+        }
+
+        $category->delete();
+
+        return $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function treeList()
+    {
 		return Category::orderByRaw('-name ASC')
-			->get()
-			->nest()
-			->listsFlattened('name');
-	}
+			->whereNotIn('id', array(1))
+            ->get()
+            ->nest()
+            ->setIndent('|–– ')
+            ->listsFlattened('name');
+    }
 
-	public function findBySlug($slug)
-	{
-		return Category::with('products')
-			->where('slug', $slug)
-			->where('menu', 1)
-			->first();
-	}
+    public function findBySlug($slug)
+    {
+        return Category::with('products')
+            ->where('slug', $slug)
+            ->where('menu', 1)
+            ->first();
+    }
 }

@@ -12,6 +12,7 @@ class AttributeController extends BaseController
 
     public function __construct(AttributeContract $attributeRepository)
     {
+		$this->middleware('auth:admin');
         $this->attributeRepository = $attributeRepository;
 	}
 	
