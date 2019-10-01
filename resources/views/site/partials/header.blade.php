@@ -124,7 +124,8 @@
 				<div class="wrap">
 					<h5 class="text-center mb-4">Login </h5>
 					<div class="login p-5 bg-dark mx-auto mw-100">
-						<form action="#" method="post">
+						<form action="{{ 'login' }}" method="post">
+							@csrf
 							<div class="form-group">
 								<label class="mb-2">Email address</label>
 								<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
@@ -171,7 +172,7 @@
 					<a class="nav-link" href="about.php">Holiday Edit</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true"
+					<a class="nav-link dropdown-toggle" href="{{ url('/shop') }}" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">
 						Shop
 					</a>
@@ -183,25 +184,25 @@
 									<h5 class="tittle-w3layouts-sub"> All Products </h5>
 									<ul>
 										<li class="media-mini mt-3">
-											<a href="shop.php">Dresses</a>
+											<a href="{{ url('/shop') }}">Dresses</a>
 										</li>
 										<li class="">
-											<a href="shop.php">Sets</a>
+											<a href="{{ url('/shop') }}">Sets</a>
 										</li>
 										<li class="">
-											<a href="shop.php">Tops</a>
+											<a href="{{ url('/shop') }}">Tops</a>
 										</li>
 										<li class="">
-											<a href="shop.php">Bottoms(Skirts & Trousers)</a>
+											<a href="{{ url('/shop') }}">Bottoms(Skirts & Trousers)</a>
 										</li>
 										<li class="">
-											<a href="shop.php">Jumpsuits</a>
+											<a href="{{ url('/shop') }}">Jumpsuits</a>
 										</li>
 										<li class="">
-											<a href="shop.php">Kaftans</a>
+											<a href="{{ url('/shop') }}">Kaftans</a>
 										</li>
 										<li class="">
-											<a href="shop.php">Outer Wear</a>
+											<a href="{{ url('/shop') }}">Outer Wear</a>
 										</li>
 									</ul>
 								</div>

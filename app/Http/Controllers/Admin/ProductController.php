@@ -57,7 +57,8 @@ class ProductController extends BaseController
 		if (!$product) {
 			return $this->responseRedirectBack('Error occurred while creating product.', 'error', true, true);
 		}
-		return $this->responseRedirect('admin.products.index', 'Product added successfully' ,'success',false, false);
+		$route = 'admin/products/edit/' . $product->id;
+		return $this->responseRedirect($route, 'Product added successfully' ,'success',false, false);
 	}
 
 	public function edit($id)

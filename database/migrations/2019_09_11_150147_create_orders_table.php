@@ -31,7 +31,7 @@ class CreateOrdersTable extends Migration
             $table->text('address');
             $table->string('city');
             $table->string('country');
-            $table->string('post_code');
+            $table->string('post_code')->nullable();
             $table->string('phone_number');
             $table->text('notes')->nullable();
 

@@ -68,6 +68,26 @@ class BaseController extends Controller
 		return redirect()->route($route);
 	}
 
+	 /**
+	 * @param $route
+	 * @param $message
+	 * @param string $type
+	 * @param bool $error
+	 * @param bool $withOldInputWhenError
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	protected function responseRedirectPath($route, $message, $type = 'info', $error = false, $withOldInputWhenError = false)
+	{
+		$this->setFlashMessage($message, $type);
+		$this->showFlashMessages();
+
+		if ($error && $withOldInputWhenError) {
+			return redirect()->back()->withInput();
+		}
+
+		return redirect($route);
+	}
+
 	/**
      * @param $message
      * @param string $type

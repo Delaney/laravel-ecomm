@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+		Unicodeveloper\Paystack\PaystackServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -232,7 +233,8 @@ return [
 		
 
 
-		'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+		'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+		'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
 
     ],
 

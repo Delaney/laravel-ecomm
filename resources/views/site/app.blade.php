@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Chechi Arinze | @yield('title')</title>
     @include('site.partials.styles')
+	@stack('styles')
 </head>
 <body>
 	<div class="banner-top container-fluid" id="home">
@@ -13,5 +14,6 @@
 	@yield('content')
 	@include('site.partials.footer')
 	@include('site.partials.scripts')
+	@stack('scripts')
 </body>
 </html>

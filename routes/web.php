@@ -26,8 +26,11 @@ Route::get('/cart', 'Site\CartController@getCart')->name('checkout.cart');
 Route::get('/cart/item/{id}/remove', 'Site\CartController@removeItem')->name('checkout.cart.remove');
 Route::get('/cart/clear', 'Site\CartController@clearCart')->name('checkout.cart.clear');
 
+Route::get('/shop', 'Site\HomeController@shop')->name('shop');
+
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/checkout', 'Site\CheckoutController@getCheckout')->name('checkout.index');
+	Route::get('/checkout', 'Site\CheckoutController@getCheckout')->name('checkout.index');
+	Route::post('/checkout', 'Site\CheckoutController@getCheckout')->name('checkout.index');
     Route::post('/checkout/order', 'Site\CheckoutController@placeOrder')->name('checkout.place.order');
 });
 
@@ -37,8 +40,8 @@ Route::get('account/orders', 'Site\AccountController@getOrders')->name('account.
 
 
 
-Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+//Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 
-Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+Route::get('checkout/payment/callback', 'Site\CheckoutController@handleGatewayCallback');
 
 Route::get('checkout/payment/complete', 'Site\CheckoutController@complete')->name('checkout.payment.complete');

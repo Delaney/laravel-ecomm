@@ -10,6 +10,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 
+use Log;
+
 /**
  * Class ProductRepository
  *
@@ -77,11 +79,19 @@ class ProductRepository extends BaseRepository implements ProductContract
 
             if ($collection->has('categories')) {
                 $product->categories()->sync($params['categories']);
-            }
+			}
+			
             return $product;
 
         } catch (QueryException $exception) {
-            throw new InvalidArgumentException($exception->getMessage());
+			$errorCode = $exception->errorInfo[1];
+			if($errorCode == 1062){
+				Log::debug(print_r($exception->errorInfo));
+				return null;
+			}
+			else {
+				throw new InvalidArgumentException($exception->getMessage());
+			}
         }
     }
 

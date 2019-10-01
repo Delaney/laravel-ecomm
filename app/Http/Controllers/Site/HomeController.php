@@ -21,4 +21,11 @@ class HomeController extends BaseController
 
 		return view('site.pages.homepage', compact('products'));
 	}
+
+	public function shop()
+	{
+		$products = $this->productRepository->listProducts();
+
+		return view('site.pages.shop', compact('products'));
+	}
 }

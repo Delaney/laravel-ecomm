@@ -8,6 +8,9 @@ use App\Services\PayPalService;
 use App\Contracts\OrderContract;
 use App\Http\Controllers\Controller;
 use Paystack;
+use Cart;
+use Response;
+use Cookie;
 
 class CheckoutController extends Controller
 {
@@ -20,7 +23,8 @@ class CheckoutController extends Controller
 
     public function getCheckout()
     {
-        return view('site.pages.checkout');
+		$cartCollection = Cart::getContent();
+		return view('site.pages.checkout', compact('cartCollection'));
     }
 
     public function placeOrder(Request $request)
@@ -28,7 +32,9 @@ class CheckoutController extends Controller
         $order = $this->orderRepository->storeOrderDetails($request->all());
 
         if ($order) {
+			Cookie::queue('order', $order->order_number, 10);
 			return Paystack::getAuthorizationUrl()->redirectNow();
+			// return Response::json(['order' => $order], 200);
 		}
 	}
 	
@@ -36,20 +42,15 @@ class CheckoutController extends Controller
 	{
 		$paymentDetails = Paystack::getPaymentData();
 
-		return $paymentDetails;
+		// return $paymentDetails;
 
-		// $paymentId = $request->input('paymentId');
-		// $payerId = $request->input('PayerID');
+		$order = Order::where('order_number', Cookie::get('order'))->first();
+		$order->status = 'processing';
+		$order->payment_status = 1;
+		$order->payment_method = 'Paystack -'. $paymentDetails['data']['channel'];
+		$order->save();
 
-		// $status = $this->payPal->completePayment($paymentId, $payerId);
-
-		// $order = Order::where('order_number', $status['invoiceId'])->first();
-		// $order->status = 'processing';
-		// $order->payment_status = 1;
-		// $order->payment_method = 'Paystack -'.$status['salesId'];
-		// $order->save();
-
-		// Cart::clear();
-		// return view('site.pages.success', compact('order'));
+		Cart::clear();
+		return view('site.pages.success', compact('order'));
 	}
 }

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Contracts\ProductContract;
 use App\Http\Controllers\Controller;
 use App\Contracts\AttributeContract;
+use App\Models\ProductImage;
+
+use Response;
 
 class ProductController extends Controller
 {
@@ -22,8 +25,9 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findProductBySlug($slug);
 		$attributes = $this->attributeRepository->listAttributes();
+		$images = ProductImage::where('product_id', $product->id);//->get();
 
-		return view('site.pages.product', compact('product', 'attributes'));
+		return view('site.pages.product', compact('product', 'attributes', 'images'));
 	}
 	
 	public function addToCart(Request $request)
@@ -33,6 +37,8 @@ class ProductController extends Controller
 
 		Cart::add(uniqid(), $product->name, $request->input('price'), $request->input('qty'), $options);
 
-		return redirect()->back()->with('message', 'Item added to cart successfully.');
+		// return redirect()->back()->with('message', 'Item added to cart successfully.');
+
+		return Response::json([], 200);
 	}
 }

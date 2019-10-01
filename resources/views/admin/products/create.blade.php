@@ -60,11 +60,9 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label" for="brand_id">Brand <span class="text-danger">*</span></label>
-                                            <select name="brand_id" id="brand_id" class="form-control @error('brand_id') is-invalid @enderror" required default="1">
+                                            <select name="brand_id" id="brand_id" class="form-control @error('brand_id') is-invalid @enderror" required>
                                                 <option value="0">Select a brand</option>
-                                                @foreach($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                @endforeach
+												<option value="1" selected>Chechi Arinze</option>
                                             </select>
                                             <div class="invalid-feedback active">
                                                 <i class="fa fa-exclamation-circle fa-fw"></i> @error('brand_id') <span>{{ $message }}</span> @enderror

@@ -5,44 +5,6 @@
 <script src="{{ asset('frontend/js/script.js') }}" type="text/javascript"></script> -->
 
 <script src="{{ asset('frontend/js/jquery-2.2.3.min.js') }}"></script>
-<!-- newsletter modal -->
-<!-- Modal -->
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body text-center p-5 mx-auto mw-100">
-				<h6>Join our newsletter and get</h6>
-				<h3>50% Off for your first Pair of Eye wear</h3>
-				<div class="login newsletter">
-					<form action="#" method="post">
-						<div class="form-group">
-							<label class="mb-2">Email address</label>
-							<input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="" required="">
-						</div>
-						<button type="submit" class="btn btn-primary submit mb-4">Get 50% Off</button>
-					</form>
-					<p class="text-center">
-						<a href="#">No thanks I want to pay full Price</a>
-					</p>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</div>
-<script>
-	$(document).ready(function () {
-		$("#myModal").modal();
-	});
-</script>
-<!-- // modal -->
 
 <!--search jQuery-->
 <script src="{{ asset('frontend/js/modernizr-2.6.2.min.js') }}"></script>
@@ -52,13 +14,28 @@
 <!-- cart-js -->
 <script src="{{ asset('frontend/js/minicart.js') }}"></script>
 <script>
-	googles.render();
+	googles.render({ 'action': '/checkout' });
+	googles.cart.on('add', function(idx, product, isExisting) {
+		console.log(product);
+		
+		let data = {
+			'productId': product._data.id,
+			'qty': 1,
+			'price': product._data.amount,
+			'_token': "{{ csrf_token() }}"
+		};
 
+		$.post('/product/add/cart', data, function(response, status, xhr){
+		}).fail(function() {
+			googles.cart.remove(idx);
+		});
+	});
 	googles.cart.on('googles_checkout', function (evt) {
 		var items, len, i;
 
 		if (this.subtotal() > 0) {
 			items = this.items();
+			console.log(items);
 
 			for (i = 0, len = items.length; i < len; i++) {}
 		}
@@ -79,18 +56,7 @@
 	});
 </script>
 <!-- carousel -->
-<!-- Count-down -->
-<script src="{{ asset('frontend/js/simplyCountdown.js') }}"></script>
-<link href="{{ asset('frontend/css/simplyCountdown.css') }}" rel='stylesheet' type='text/css' />
-<script>
-	var d = new Date();
-	simplyCountdown('simply-countdown-custom', {
-		year: d.getFullYear(),
-		month: d.getMonth() + 2,
-		day: 25
-	});
-</script>
-<!--// Count-down -->
+
 <script src="{{ asset('frontend/js/owl.carousel.js') }}"></script>
 <script>
 	$(document).ready(function () {
