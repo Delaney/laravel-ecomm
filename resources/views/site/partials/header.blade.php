@@ -110,25 +110,25 @@
 									<h5 class="tittle-w3layouts-sub"> All Products </h5>
 									<ul>
 										<li class="media-mini mt-3">
-											<a href="{{ url('/shop') }}">Dresses</a>
+											<a href="{{ url('/category/dresses') }}">Dresses</a>
 										</li>
 										<li class="">
-											<a href="{{ url('/shop') }}">Sets</a>
+											<a href="{{ url('/category/sets') }}">Sets</a>
 										</li>
 										<li class="">
-											<a href="{{ url('/shop') }}">Tops</a>
+											<a href="{{ url('/category/tops') }}">Tops</a>
 										</li>
 										<li class="">
-											<a href="{{ url('/shop') }}">Bottoms(Skirts & Trousers)</a>
+											<a href="{{ url('/category/bottoms') }}">Bottoms(Skirts & Trousers)</a>
 										</li>
 										<li class="">
-											<a href="{{ url('/shop') }}">Jumpsuits</a>
+											<a href="{{ url('/category/jumpsuits') }}">Jumpsuits</a>
 										</li>
 										<li class="">
-											<a href="{{ url('/shop') }}">Kaftans</a>
+											<a href="{{ url('/category/kaftans') }}">Kaftans</a>
 										</li>
 										<li class="">
-											<a href="{{ url('/shop') }}">Outer Wear</a>
+											<a href="{{ url('/category/outer-wear') }}">Outer Wear</a>
 										</li>
 									</ul>
 								</div>
