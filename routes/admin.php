@@ -8,9 +8,7 @@ Route::group(['prefix'  =>  'admin'], function () {
 
 	Route::group(['middleware' => ['auth:admin']], function () {
 		
-		Route::get('/', function () {
-			return view('admin.dashboard.index');
-		})->name('admin.dashboard');
+		Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
 
 	});
 
@@ -87,6 +85,8 @@ Route::group(['prefix'  =>  'admin'], function () {
 	Route::group(['prefix' => 'orders'], function () {
 		Route::get('/', 'Admin\OrderController@index')->name('admin.orders.index');
 		Route::get('/{order}/show', 'Admin\OrderController@show')->name('admin.orders.show');
+		Route::get('/{order}/cancel', 'Admin\OrderController@cancel')->name('admin.orders.cancel');
+		Route::get('/{order}/complete', 'Admin\OrderController@complete')->name('admin.orders.complete');
 	});
 
 });

@@ -9,6 +9,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+			@include('admin.partials.flash')
             <div class="tile">
                 <section class="invoice">
                     <div class="row mb-4">
@@ -62,6 +63,23 @@
                     </div>
                 </section>
             </div>
+
+			<div class="tile">
+				<div class="row">
+					<div class="col-md-6">
+						<a href="{{ route('admin.orders.cancel', $order->order_number) }}" class="btn btn-block btn-danger {{ $order->status == 'cancelled' || $order->status == 'completed' ? 'disabled' : '' }}">
+							<i class="fa fa-times-circle-o"></i>
+							Cancel Order
+						</a>
+					</div>
+					<div class="col-md-6">
+						<a href="{{ route('admin.orders.complete', $order->order_number) }}" class="btn btn-block btn-primary {{ $order->status == 'cancelled' || $order->status == 'completed' ? 'disabled' : '' }}">
+							<i class="fa fa-check"></i>
+							Mark Order as Complete
+						</a>
+					</div>
+				</div>
+			</div>
         </div>
     </div>
 @endsection

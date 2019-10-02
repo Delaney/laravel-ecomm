@@ -7,6 +7,7 @@ use App\Models\Attribute;
 use Illuminate\Http\Request;
 use App\Models\ProductAttribute;
 use App\Http\Controllers\Controller;
+use Response;
 
 class ProductAttributeController extends Controller
 {
@@ -52,7 +53,15 @@ class ProductAttributeController extends Controller
      */
     public function addAttribute(Request $request)
     {
-        $productAttribute = ProductAttribute::create($request->data);
+		// $productAttribute = ProductAttribute::create($request->data);
+		$productAttribute = new ProductAttribute;
+		
+		$productAttribute->value = $request->data['value'];
+		$productAttribute->quantity = $request->data['quantity'];
+		$productAttribute->price = $request->data['price'];
+		$productAttribute->product_id = $request->data['product_id'];
+		$productAttribute->attribute_id = $request->data['attribute_id'];
+		$productAttribute->save();
 
         if ($productAttribute) {
             return response()->json(['message' => 'Product attribute added successfully.']);

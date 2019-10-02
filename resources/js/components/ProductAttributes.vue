@@ -104,6 +104,7 @@
             }
         },
         created: function() {
+			this.loadAttributes();
 			this.loadProductAttributes(this.productid);
 			this.loadProductAttributes(this.productid);
         },
@@ -160,6 +161,7 @@
 						price: this.currentPrice,
 						product_id: this.productid,
 					};
+					console.log(data);
 
 					axios.post('/admin/products/attributes/add', {
 						data: data

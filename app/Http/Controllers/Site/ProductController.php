@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Contracts\ProductContract;
 use App\Http\Controllers\Controller;
 use App\Contracts\AttributeContract;
+use App\Models\Product;
 use App\Models\ProductImage;
 
 use Response;
@@ -25,9 +26,10 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findProductBySlug($slug);
 		$attributes = $this->attributeRepository->listAttributes();
-		$images = ProductImage::where('product_id', $product->id);//->get();
+		$images = ProductImage::where('product_id', $product->id);//
+		$featured = Product::where('featured', 1)->get();
 
-		return view('site.pages.product', compact('product', 'attributes', 'images'));
+		return view('site.pages.product', compact('product', 'attributes', 'images', 'featured'));
 	}
 	
 	public function addToCart(Request $request)

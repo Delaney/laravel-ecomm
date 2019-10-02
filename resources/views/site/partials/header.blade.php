@@ -11,7 +11,8 @@
 		<div class="col-md-6 logo-w3layouts text-center">
 			<h1 class="logo-w3layouts">
 				<a class="navbar-brand" href="{{ url('/') }}">
-					Chechi Arinze </a>
+					<img src="{{ asset('frontend/images/logo.png') }}" alt="" class="img-fluid">
+				</a>
 			</h1>
 		</div>
 

@@ -29,4 +29,22 @@ class OrderController extends BaseController
 		$this->setPageTitle('Order Details', $orderNumber);
 		return view('admin.orders.show', compact('order'));
 	}
+
+	public function cancel($orderNumber)
+	{
+		$order = $this->orderRepository->findOrderByNumber($orderNumber);
+		$order->status = 'cancelled';
+		$order->save();
+
+		return $this->responseRedirectBack('Order ' .$orderNumber.' has been cancelled.', 'success', true, true);
+	}
+
+	public function complete($orderNumber)
+	{
+		$order = $this->orderRepository->findOrderByNumber($orderNumber);
+		$order->status = 'completed';
+		$order->save();
+
+		return $this->responseRedirectBack('Order ' .$orderNumber.' has been completed.', 'success', true, true);
+	}
 }

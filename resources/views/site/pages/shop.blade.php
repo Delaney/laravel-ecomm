@@ -197,7 +197,7 @@
 				<!--/slide-->
 			<div class="slider-img mid-sec mt-lg-5 mt-2">
 					<!--//banner-sec-->
-					<h3 class="tittle-w3layouts text-left my-lg-4 my-3">Featured Products</h3>
+					<h3 class="tittle-w3layouts text-left my-lg-4 my-3">Popular Items</h3>
 					<div class="mid-slider">
 						<div class="owl-carousel owl-theme row">
 							@for ($i = 0; $i < 6; $i++)
@@ -210,7 +210,7 @@
 											<div class="product-googles-info slide-img googles">
 												<div class="men-pro-item">
 													<div class="men-thumb-item">
-													@if ($product->main == NULL)
+													@if ($featured[$i]->main == NULL)
 														<img src="{{ asset('default/product.png') }}" class="img-fluid" alt="">
 													@else
 														<img src="{{ asset('storage/'.$featured[$i]->main) }}" class="img-fluid" alt="">
