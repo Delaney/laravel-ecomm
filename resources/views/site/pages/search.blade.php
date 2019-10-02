@@ -1,5 +1,5 @@
 @extends('site.app')
-@section('title', $category->name)
+@section('title', "Search Results For ". $str)
 @section('content')
     <!-- banner -->
 	<div class="banner_inner">
@@ -11,7 +11,7 @@
 						<a href="{{ '/' }}">Home</a>
 						<i>|</i>
 					</li>
-					<li>{{ $category->name }}</li>
+					<li>Search Results for {{ str }}</li>
 				</ul>
 			</div>
 		</div>
@@ -23,7 +23,6 @@
 	<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
 		<div class="container-fluid">
 			<div class="inner-sec-shop px-lg-4 px-3">
-				<h3 class="tittle-w3layouts my-lg-4 mt-3">{{ $category->name }}</h3>
 				<div class="row">
 					<!-- product left -->
 					<div class="side-bar col-lg-3">
@@ -73,7 +72,7 @@
 							
 								<div class="row">
 									<!-- /womens -->
-									@forelse($category->products as $product)
+									@forelse($results as $product)
 									<div class="col-md-3 product-men women_two shop-gd">
 										<div class="product-googles-info googles">
 											<div class="men-pro-item">
@@ -133,104 +132,7 @@
 					<!--//product right-->
 				</div>
 				<!--/slide-->
-			<div class="slider-img mid-sec mt-lg-5 mt-2">
-					<!--//banner-sec-->
-					<h3 class="tittle-w3layouts text-left my-lg-4 my-3">Popular Items</h3>
-					<div class="mid-slider">
-						<div class="owl-carousel owl-theme row">
-							@for ($i = 0; $i < 6; $i++)
-								@if ($i >= count($featured))
-									@break
-								@else
-								<div class="item">
-									<div class="gd-box-info text-center">
-										<div class="product-men women_two bot-gd">
-											<div class="product-googles-info slide-img googles">
-												<div class="men-pro-item">
-													<div class="men-thumb-item">
-													@if ($featured[$i]->main == NULL)
-														<img src="{{ asset('default/product.png') }}" class="img-fluid" alt="">
-													@else
-														<img src="{{ asset('storage/'.$featured[$i]->main) }}" class="img-fluid" alt="">
-													@endif
-														<div class="men-cart-pro">
-															<div class="inner-men-cart-pro">
-																<a href="{{ 'product/'.$featured[$i]->slug }}" class="link-product-add-cart">Quick View</a>
-															</div>
-														</div>
-														<span class="product-new-top">New</span>
-													</div>
-													<div class="item-info-product">
-
-														<div class="info-product-price">
-															<div class="grid_meta">
-																<div class="product_price">
-																	<h4>
-																		<a href="{{ 'product/'.$featured[$i]->slug }}">{{ $featured[$i]->name }} </a>
-																	</h4>
-																	<div class="grid-price mt-2">
-																		<span class="money ">{{ config('settings.currency_symbol') }}{{ $featured[$i]->price }}</span>
-																	</div>
-																</div>
-																<ul class="stars">
-																	<li>
-																		<a href="#">
-																			<i class="fa fa-star" aria-hidden="true"></i>
-																		</a>
-																	</li>
-																	<li>
-																		<a href="#">
-																			<i class="fa fa-star" aria-hidden="true"></i>
-																		</a>
-																	</li>
-																	<li>
-																		<a href="#">
-																			<i class="fa fa-star" aria-hidden="true"></i>
-																		</a>
-																	</li>
-																	<li>
-																		<a href="#">
-																			<i class="fa fa-star-half-o" aria-hidden="true"></i>
-																		</a>
-																	</li>
-																	<li>
-																		<a href="#">
-																			<i class="fa fa-star-o" aria-hidden="true"></i>
-																		</a>
-																	</li>
-																</ul>
-															</div>
-															<div class="googles single-item hvr-outline-out">
-																<form action="#" method="post">
-																	<input type="hidden" name="cmd" value="_cart">
-																	<input type="hidden" name="add" value="1">
-																	<input type="hidden" name="googles_item" value="{{ $featured[$i]->name }}">
-																	<input type="hidden" name="amount" value="{{ $featured[$i]->price }}">
-																	<input type="hidden" name="id" value="{{ $featured[$i]->id }}">
-																	<input type="hidden" name="slug" value="{{ $featured[$i]->slug }}">
-																	<input type="hidden" name="currency_code" value="{{ config('settings.currency_code') }}">
-																	<button type="submit" class="googles-cart pgoogles-cart">
-																		<i class="fas fa-cart-plus"></i>
-																	</button>
-
-																</form>
-
-															</div>
-														</div>
-
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								@endif
-							@endfor
-						</div>
-					</div>
-				</div>
-				<!--//slider-->
-			</div>
+	
 		</div>
 	</section>
 	<!--footer -->

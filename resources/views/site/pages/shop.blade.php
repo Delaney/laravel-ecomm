@@ -30,13 +30,14 @@
 					<div class="side-bar col-lg-3">
 						<div class="search-hotel">
 							<h3 class="agileits-sear-head">Search Here..</h3>
-							<form action="#" method="post">
-									<input class="form-control" type="search" name="search" placeholder="Search here..." required="">
-									<button class="btn1">
-											<i class="fas fa-search"></i>
-									</button>
-									<div class="clearfix"> </div>
-								</form>
+							<form action="{{ url('/search') }}" method="post">
+								@csrf
+								<input class="form-control" type="search" name="search" placeholder="Search here..." required="">
+								<button class="btn1">
+										<i class="fas fa-search"></i>
+								</button>
+								<div class="clearfix"> </div>
+							</form>
 						</div>
 						<!-- price range -->
 						<div class="range">

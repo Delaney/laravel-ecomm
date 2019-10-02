@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/', 'Site\HomeController@index')->name('home');
 
 Route::get('/product/{slug}', 'Site\ProductController@show')->name('product.show');
-Route::get('/search/{str}', 'Site\ProductController@search')->name('product.search');
+Route::post('/search', 'Site\ProductController@search')->name('product.search');
 
 Route::post('/product/add/cart', 'Site\ProductController@addToCart')->name('product.add.cart');
 

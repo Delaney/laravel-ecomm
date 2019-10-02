@@ -44,9 +44,9 @@ class ProductController extends Controller
 		return Response::json([], 200);
 	}
 
-	public function search($str)
+	public function search(Request $request)
 	{
-		$results = Product::search($str)->get();
+		$results = Product::search($request->str)->get();
 
 		return Response::json([
 			'results' => $results
