@@ -28,6 +28,10 @@ Route::get('/cart/clear', 'Site\CartController@clearCart')->name('checkout.cart.
 
 Route::get('/shop', 'Site\HomeController@shop')->name('shop');
 
+Route::view('/contact', 'site.pages.contact')->name('contact');
+
+Route::view('/about', 'site.pages.about')->name('about');
+
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/checkout', 'Site\CheckoutController@getCheckout')->name('checkout.index');
 	Route::post('/checkout', 'Site\CheckoutController@getCheckout')->name('checkout.index');

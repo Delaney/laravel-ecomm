@@ -8,6 +8,7 @@ use App\Contracts\CategoryContract;
 use App\Contracts\ProductContract;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\StoreProductFormRequest;
+use App\Models\Product;
 
 use Response;
 
@@ -81,5 +82,20 @@ class ProductController extends BaseController
 			return $this->responseRedirectBack('Error occurred while updating product.', 'error', true, true);
 		}
 		return $this->responseRedirect('admin.products.index', 'Product updated successfully' ,'success',false, false);
+	}
+
+	public function featured($id)
+	{
+		$product = Product::find($id);
+		
+		if ($product->featured) {
+			$product->featured = 0;
+			$product->save();
+			return $this->responseRedirectBack('Product is no longer featured.', 'success', true, true);
+		} else {
+			$product->featured = 1;
+			$product->save();
+			return $this->responseRedirectBack('Product set as featured.', 'success', true, true);
+		}
 	}
 }

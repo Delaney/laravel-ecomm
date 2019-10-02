@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Contracts\ProductContract;
 use App\Http\Controllers\BaseController;
 
+use App\Models\Product;
+
 class HomeController extends BaseController
 {
     protected $productRepository;
@@ -25,7 +27,8 @@ class HomeController extends BaseController
 	public function shop()
 	{
 		$products = $this->productRepository->listProducts();
+		$featured = Product::where('featured', 1)->get();
 
-		return view('site.pages.shop', compact('products'));
+		return view('site.pages.shop', compact('products', 'featured'));
 	}
 }

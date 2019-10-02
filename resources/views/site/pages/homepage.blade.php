@@ -329,7 +329,7 @@
 				</div>
 			</div>
 			<!-- //testimonials -->
-			<div class="row galsses-grids pt-lg-5 pt-3">
+			<!-- <div class="row galsses-grids pt-lg-5 pt-3">
 				<div class="col-lg-6 galsses-grid-left">
 					<figure class="effect-lexi">
 						<img src="{{ asset('frontend/images/banner4.jpeg') }}" alt="" class="img-fluid">
@@ -352,7 +352,7 @@
 						</figcaption>
 					</figure>
 				</div>
-			</div>
+			</div> -->
 			<!-- /grids -->
 			
 			<!-- //grids -->
