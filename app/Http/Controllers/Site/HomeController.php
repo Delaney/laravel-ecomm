@@ -31,4 +31,12 @@ class HomeController extends BaseController
 
 		return view('site.pages.shop', compact('products', 'featured'));
 	}
+
+	public function new()
+	{
+		$products = Product::orderBy('id', 'desc')->take(10)->get();
+		$featured = Product::where('featured', 1)->get();
+
+		return view('site.pages.shop', compact('products', 'featured'));
+	}
 }

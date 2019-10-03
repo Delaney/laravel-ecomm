@@ -237,5 +237,28 @@
 
 @endsection
 @push('styles')
+	<link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui1.css') }}">
 	<link href="{{ asset('frontend/css/shop.css') }}" rel='stylesheet' type='text/css' />
+@endpush
+
+@push('scripts')
+	<!-- price range (top products) -->
+	<script src="{{ asset('frontend/js/jquery-ui.js') }}"></script>
+	<script>
+		//<![CDATA[ 
+		$(window).load(function () {
+			$("#slider-range").slider({
+				range: true,
+				min: 1000,
+				max: 900000,
+				values: [50, 6000],
+				slide: function (event, ui) {
+					$("#amount").val("₦" + ui.values[0] + " - ₦" + ui.values[1]);
+				}
+			});
+			$("#amount").val("₦" + $("#slider-range").slider("values", 0) + " - ₦" + $("#slider-range").slider("values", 1));
+
+		}); //]]>
+	</script>
+	<!-- //price range (top products) -->
 @endpush

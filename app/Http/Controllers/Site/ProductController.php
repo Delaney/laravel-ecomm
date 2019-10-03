@@ -46,10 +46,12 @@ class ProductController extends Controller
 
 	public function search(Request $request)
 	{
-		$results = Product::search($request->str)->get();
+		$results = Product::where('name','LIKE','%'.$request->search.'%')->get();
+		// $results = Product::where('featured', 1)->get();
 
-		return Response::json([
-			'results' => $results
-		], 200);
+		return view('site.pages.search', [
+			'results' => $results,
+			'search' => $request->search
+		]);
 	}
 }

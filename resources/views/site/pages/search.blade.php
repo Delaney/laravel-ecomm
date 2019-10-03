@@ -1,5 +1,5 @@
 @extends('site.app')
-@section('title', "Search Results For ". $str)
+@section('title', "Search Results For ". $search)
 @section('content')
     <!-- banner -->
 	<div class="banner_inner">
@@ -11,7 +11,7 @@
 						<a href="{{ '/' }}">Home</a>
 						<i>|</i>
 					</li>
-					<li>Search Results for {{ str }}</li>
+					<li>Search Results for {{ $search }}</li>
 				</ul>
 			</div>
 		</div>
@@ -124,7 +124,7 @@
 										</div>
 									</div>
 									@empty
-										<p>No Products found in {{ $category->name }}.</p>
+										<p>No Products found.</p>
 									@endforelse
 								</div>
 						</div>
@@ -139,5 +139,28 @@
 
 @endsection
 @push('styles')
+	<link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui1.css') }}">
 	<link href="{{ asset('frontend/css/shop.css') }}" rel='stylesheet' type='text/css' />
+@endpush
+
+@push('scripts')
+	<!-- price range (top products) -->
+	<script src="{{ asset('frontend/js/jquery-ui.js') }}"></script>
+	<script>
+		//<![CDATA[ 
+		$(window).load(function () {
+			$("#slider-range").slider({
+				range: true,
+				min: 1000,
+				max: 900000,
+				values: [50, 6000],
+				slide: function (event, ui) {
+					$("#amount").val("₦" + ui.values[0] + " - ₦" + ui.values[1]);
+				}
+			});
+			$("#amount").val("₦" + $("#slider-range").slider("values", 0) + " - ₦" + $("#slider-range").slider("values", 1));
+
+		}); //]]>
+	</script>
+	<!-- //price range (top products) -->
 @endpush

@@ -92,7 +92,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url('/about') }}">New In</a>
+					<a class="nav-link" href="{{ url('/new-items') }}">New In</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="{{ url('/about') }}">Holiday Edit</a>
