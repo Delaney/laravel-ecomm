@@ -22,12 +22,26 @@
 			'productId': product._data.id,
 			'qty': 1,
 			'price': product._data.amount,
+			'uid': product._data.uid,
 			'_token': "{{ csrf_token() }}"
 		};
 
 		$.post('/product/add/cart', data, function(response, status, xhr){
 		}).fail(function() {
 			googles.cart.remove(idx);
+		});
+	});
+	googles.cart.on('remove', function(idx, product) {
+		console.log(product);
+		
+		let data = {
+			'uid': product._data.uid,
+			'_token': "{{ csrf_token() }}"
+		};
+
+		console.log(data);
+
+		$.post('/product/remove/cart', data, function(response, status, xhr){
 		});
 	});
 	googles.cart.on('googles_checkout', function (evt) {

@@ -109,6 +109,7 @@
 																<input type="hidden" name="googles_item" value="{{ $product->name }}">
 																<input type="hidden" name="amount" value="{{ $product->price }}">
 																<input type="hidden" name="id" value="{{ $product->id }}">
+																<input type="hidden" name="uid" value="{{ uniqid() }}">
 																<input type="hidden" name="slug" value="{{ $product->slug }}">
 																<input type="hidden" name="currency_code" value="{{ config('settings.currency_code') }}">
 																<button type="submit" class="googles-cart pgoogles-cart">

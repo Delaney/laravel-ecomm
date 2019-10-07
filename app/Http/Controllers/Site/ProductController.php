@@ -44,6 +44,15 @@ class ProductController extends Controller
 		return Response::json([], 200);
 	}
 
+	public function removeFromCart(Request $request)
+	{
+		$options = $request->except('_token', 'productId', 'price', 'qty');
+
+		Cart::remove($request->input('uid'));
+
+		return Response::json(['req' => $request->input('uid')], 200);
+	}
+
 	public function search(Request $request)
 	{
 		$results = Product::where('name','LIKE','%'.$request->search.'%')->get();

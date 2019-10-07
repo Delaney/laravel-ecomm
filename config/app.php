@@ -167,6 +167,8 @@ return [
          */
 		Unicodeveloper\Paystack\PaystackServiceProvider::class,
 
+		Barryvdh\DomPDF\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -235,6 +237,7 @@ return [
 
 		'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
 		'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
+		'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

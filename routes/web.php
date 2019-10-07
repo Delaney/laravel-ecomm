@@ -22,6 +22,7 @@ Route::get('/product/{slug}', 'Site\ProductController@show')->name('product.show
 Route::post('/search', 'Site\ProductController@search')->name('search');
 
 Route::post('/product/add/cart', 'Site\ProductController@addToCart')->name('product.add.cart');
+Route::post('/product/remove/cart', 'Site\ProductController@removeFromCart')->name('product.remove.cart');
 
 
 Route::get('/cart', 'Site\CartController@getCart')->name('checkout.cart');

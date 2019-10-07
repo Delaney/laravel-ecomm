@@ -25,11 +25,40 @@
 						</a>
 					</li>
 				@else
-					<li class="button-log">
-						<a class="" href="#">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="{{ url('account/orders') }}" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">
 							<span class="fa fa-user" aria-hidden="true"></span>
 						</a>
+						<ul class="dropdown-menu mega-menu ">
+							<li>
+								<div class="row">
+									<div class="">
+										<p class="mt-3"> {{ auth()->user()->getFullNameAttribute() }} </p>
+										<ul>
+											<li class="pt-3 pb-3 m-0" style="display: block;">
+												<a href="{{ url('account/orders') }}">My Orders</a>
+											</li>
+											<li class="pt-3 pb-3 m-0" style="display: block;">
+												<a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+											</li>
+
+											<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+												{{ csrf_field() }}
+											</form>
+										</ul>
+									</div>
+									
+								</div>
+								<hr>
+							</li>
+						</ul>
 					</li>
+					<!-- <li class="">
+						<a class="btn-open" href="{{ url('account/orders') }}">
+							<span class="fa fa-user" aria-hidden="true"></span>
+						</a>
+					</li> -->
 				@endguest
 				<li class="galssescart galssescart2 cart cart box_1">
 					<form action="#" method="post" class="last">
@@ -50,20 +79,20 @@
 				<div class="wrap">
 					<h5 class="text-center mb-4">Login </h5>
 					<div class="login p-5 bg-dark mx-auto mw-100">
-						<form action="{{ 'login' }}" method="post">
+						<form action="{{ route('login') }}" method="POST" role="form">
 							@csrf
 							<div class="form-group">
 								<label class="mb-2">Email address</label>
-								<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
+								<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
 								<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 							</div>
 							<div class="form-group">
 								<label class="mb-2">Password</label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required="">
+								<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="" required="">
 							</div>
 							<div class="form-check mb-2">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
-								<label class="form-check-label" for="exampleCheck1">Check me out</label>
+								<input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1">Remember Me</label>
 							</div>
 							<button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
 

@@ -93,11 +93,11 @@
 									<div class="first-row form-group">
 										<div class="controls">
 											<label class="control-label">First Name: </label>
-											<input class="billing-address-name form-control" type="text" name="first_name" required placeholder="First Name">
+											<input class="billing-address-name form-control" type="text" name="first_name" value="{{ auth()->user()->first_name }}"  required placeholder="First Name">
 										</div>
 										<div class="controls">
 											<label class="control-label">Last Name: </label>
-											<input class="billing-address-name form-control" type="text" name="last_name" required placeholder="Last Name">
+											<input class="billing-address-name form-control" type="text" name="last_name" value="{{ auth()->user()->last_name }}"  required placeholder="Last Name">
 										</div>
 
 										<div class="card_number_grids">
@@ -117,19 +117,19 @@
 										</div>
 										<div class="controls">
 											<label class="control-label">Address: </label>
-											<input class="form-control" type="text" name="address" required placeholder="Address">
+											<input class="form-control" type="text" name="address" value="{{ auth()->user()->address }}"  required placeholder="Address">
 										</div>
 										<div class="controls">
 											<label class="control-label">Town/City: </label>
-											<input class="form-control" type="text" name="city" required placeholder="Town/City">
+											<input class="form-control" type="text" name="city" value="{{ auth()->user()->city }}"  required placeholder="Town/City">
 										</div>
 										<div class="controls">
 											<label class="control-label">Country: </label>
-											<input class="form-control" type="text" name="country" required placeholder="Country">
+											<input class="form-control" type="text" name="country" value="{{ auth()->user()->country }}"  required placeholder="Country">
 										</div>
 										<div class="controls">
 											<label class="control-label">Post Code: </label>
-											<input class="form-control" type="text" name="post_code" required placeholder="Post Code">
+											<input class="form-control" type="text" name="post_code" placeholder="Post Code">
 										</div>
 										
 										<div class="controls">
