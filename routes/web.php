@@ -15,11 +15,15 @@ require 'admin.php';
 
 Auth::routes();
 
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::get('/', 'Site\HomeController@index')->name('home');
 Route::get('/new-items', 'Site\HomeController@new')->name('new');
 
 Route::get('/product/{slug}', 'Site\ProductController@show')->name('product.show');
+Route::get('category/product/{slug}', 'Site\ProductController@show')->name('category.product.show');
 Route::post('/search', 'Site\ProductController@search')->name('search');
+Route::post('/search/price', 'Site\ProductController@searchPriceRange')->name('search.price');
 
 Route::post('/product/add/cart', 'Site\ProductController@addToCart')->name('product.add.cart');
 Route::post('/product/remove/cart', 'Site\ProductController@removeFromCart')->name('product.remove.cart');
@@ -32,6 +36,7 @@ Route::get('/cart/clear', 'Site\CartController@clearCart')->name('checkout.cart.
 Route::get('/shop', 'Site\HomeController@shop')->name('shop');
 
 Route::view('/contact', 'site.pages.contact')->name('contact');
+Route::post('/contact', 'Site\HomeController@contact');
 
 Route::view('/about', 'site.pages.about')->name('about');
 

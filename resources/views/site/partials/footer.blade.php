@@ -65,26 +65,26 @@
 				</div>
 				<ul class="links">
 					<li>
-						<a href="index.php">Home</a>
+						<a href="{{ url('/') }}">Home</a>
 					</li>
 					
 					<li>
-						<a href="shop.php">Return Policy</a>
+						<a href="{{ url('/shop') }}">Return Policy</a>
 					</li>
 					<li>
-						<a href="contact.php">Delivery & Shipping </a>
-					</li>
-					
-					<li>
-						<a href="contact.php">Payment </a>
+						<a href="{{ url('/contact') }}">Delivery & Shipping </a>
 					</li>
 					
 					<li>
-						<a href="contact.php"> Measurement Guide </a>
+						<a href="{{ url('/contact') }}">Payment </a>
 					</li>
 					
 					<li>
-						<a href="contact.php"> FAQ						</a>
+						<a href="{{ url('/contact') }}"> Measurement Guide </a>
+					</li>
+					
+					<li>
+						<a href="{{ url('/contact') }}"> FAQ						</a>
 					</li>
 				</ul>
 			</div>

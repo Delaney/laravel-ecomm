@@ -15,3 +15,10 @@
         </div>
     </section>
 @stop
+@if($order->payment_status)
+	@push('scripts')
+		<script>
+			googles.cart.destroy();
+		</script>
+	@endpush
+@endif

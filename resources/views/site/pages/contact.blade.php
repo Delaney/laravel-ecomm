@@ -75,7 +75,8 @@
 					</div>
 				</div>
 				<div class="contact_grid_right">
-					<form action="#" method="post">
+					<form action="contact" method="post">
+						@csrf
 						<div class="row contact_left_grid">
 							<div class="col-md-6 con-left">
 								<div class="form-group">
@@ -87,8 +88,8 @@
 									<input class="form-control" type="email" name="Email" placeholder="" required="">
 								</div>
 								<div class="form-group">
-									<label class="my-2">Subject</label>
-									<input class="form-control" type="text" name="Subject" placeholder="" required="">
+									<label class="my-2">Phone</label>
+									<input class="form-control" type="text" name="Phone" placeholder="">
 								</div>
 							</div>
 							<div class="col-md-6 con-right">

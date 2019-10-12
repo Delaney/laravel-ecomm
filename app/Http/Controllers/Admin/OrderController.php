@@ -18,6 +18,7 @@ class OrderController extends BaseController
 	public function index()
 	{
 		$orders = $this->orderRepository->listOrders();
+		$orders->reverse();
 		$this->setPageTitle('Orders', 'List of all orders');
 		return view('admin.orders.index', compact('orders'));
 	}

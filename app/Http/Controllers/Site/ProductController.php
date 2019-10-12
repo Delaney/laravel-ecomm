@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use Cart;
+use DB;
 use Illuminate\Http\Request;
 use App\Contracts\ProductContract;
 use App\Http\Controllers\Controller;
@@ -61,6 +62,22 @@ class ProductController extends Controller
 		return view('site.pages.search', [
 			'results' => $results,
 			'search' => $request->search
+		]);
+	}
+
+	public function searchPriceRange(Request $request)
+	{
+		// $results = Product::where('price', '>=', $request->price_min)->where('price', '=<', $request->price_max)->get();
+		$results = DB::table('products')->whereBetween('price', array($request->price_min, $request->price_max))->get();
+		// return $results;
+		
+		$sign = \Config::get('settings')['currency_symbol'];
+
+		$title = "Products between " . $sign . $request->price_min . " & " . $sign . $request->price_max;
+
+		return view('site.pages.search', [
+			'results' => $results,
+			'search' => $title
 		]);
 	}
 }

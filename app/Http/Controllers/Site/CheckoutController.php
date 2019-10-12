@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\Order;
 use App\Models\User;
+use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Services\PayPalService;
 use App\Contracts\OrderContract;
 use App\Http\Controllers\Controller;
@@ -13,7 +15,6 @@ use Cart;
 use Response;
 use Cookie;
 use PDF;
-use Mail;
 
 class CheckoutController extends Controller
 {
@@ -35,7 +36,7 @@ class CheckoutController extends Controller
         $order = $this->orderRepository->storeOrderDetails($request->all());
 
         if ($order) {
-			Cookie::queue('order', $order->order_number, 10);
+			Cookie::queue('order', $order->order_number, 100);
 			return Paystack::getAuthorizationUrl()->redirectNow();
 		}
 	}
@@ -44,26 +45,34 @@ class CheckoutController extends Controller
 	{
 		$paymentDetails = Paystack::getPaymentData();
 
-		// return $paymentDetails;
-
 		$order = Order::where('order_number', Cookie::get('order'))->first();
 		$order->status = 'processing';
 		$order->payment_status = 1;
 		$order->payment_method = 'Paystack -'. $paymentDetails['data']['channel'];
 		$order->save();
-
+		$order->get();
+		
 		Cart::clear();
 
 		$data["email"] = $order->user->email;
         $data["client_name"] = $order->user->email;
 		$data["subject"]="Your order has been placed successfully!";
 		
-		// $pdf = PDF::loadView('emails.invoice', compact('order'));
+		// $orderO = $order;
+		// $order = $order->toArray();
+
+		// $email = $orderO->user->email;
+		// $name = $orderO->user->fullName;
+		$user = User::where('id', $order->user_id)->first();
+		// return $orderO->user;
 
 		try{
-			Mail::send('emails.invoice', $data, function($message)use($order) {
-				$message->to($order->user->email, $order->user->fullName)->subject("Your order has been placed successfully!");
-			});
+			// Mail::to($email)->subject("Your order has been placed successfully!")->send(new InvoiceMail($order));
+			Mail::to($order->user->email)->send(new InvoiceMail($order, $user));
+
+			// Mail::send('emails.invoice', $data, function($message) use($order, $email, $name) {
+			// 	$message->to($email, $name)->subject("Your order has been placed successfully!");
+			// });
 		} catch(JWTException $exception){
 			$this->serverstatuscode = "0";
 			$this->serverstatusdes = $exception->getMessage();
@@ -75,9 +84,9 @@ class CheckoutController extends Controller
 		} else {
 			$this->statusdesc = "Message sent successfully";
 			$this->statuscode = "1";
+			return view('site.pages.success', compact('order'));
 		}
 
-		return view('site.pages.success', compact('order'));
 	}
 
 	public function clearCart()

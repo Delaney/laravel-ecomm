@@ -42,30 +42,32 @@
 						<!-- price range -->
 						<div class="range">
 							<h3 class="agileits-sear-head">Price range</h3>
-							<ul class="dropdown-menu6">
+							<ul class="dropdown-menu6" style="display: inline;">
 								<li>
-
+									<div class="row" style="justify-content:space-around;">
+										<div class="col-md-5">
+											<input type="text" id="amount_min" name="amount_min" style="width:100%;" />
+										</div>
+										<div class="col-md-2">
+											<span class="text-center">-</span>
+										</div>
+										<div class="col-md-5">
+											<input type="text" id="amount_max" name="amount_max" style="width:100%;" />
+										</div>
+									</div>
 									<div id="slider-range"></div>
-									<input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
 								</li>
 							</ul>
+							<div style="display:block;height:30px;"></div>
+							<form id="price-filter-form" method="POST" action="search/price" style="display:none;">
+								@csrf
+								<input type="text" id="price_min" name="price_min" />
+								<input type="text" id="price_max" name="price_max" />
+							</form>
+							<button id="slider-range-btn" class="btn btn-warning">Filter</button>
 						</div>
 						<!-- //price range -->
-						<!--preference -->
-						<div class="left-side">
-							<h3 class="agileits-sear-head">Deal Offer On</h3>
-							<ul>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Backpack</span>
-								</li>
-								<li>
-									<input type="checkbox" class="checked">
-									<span class="span">Phone Pocket</span>
-								</li>
-
-							</ul>
-						</div>
+						
 						<!-- // preference -->
 						<!-- discounts -->
 						
@@ -317,22 +319,22 @@
 				max: 900000,
 				values: [50, 6000],
 				slide: function (event, ui) {
-					$("#amount").val("₦" + ui.values[0] + " - ₦" + ui.values[1]);
+					document.querySelector("#amount_min").value = "₦" + ui.values[0];
+					document.querySelector("#amount_max").value = "₦" + ui.values[1];
+					document.querySelector("#price_min").value = ui.values[0];
+					document.querySelector("#price_max").value = ui.values[1];
+					console.log("₦" + ui.values[1]);
 				}
 			});
+			$("#slider-range-btn").click(function () {
+				$("#price-filter-form").submit();
+			})
+			console.log($("#slider-range").slider("values", 0));
+			console.log($("#slider-range").slider("values", 1));
 			$("#amount").val("₦" + $("#slider-range").slider("values", 0) + " - ₦" + $("#slider-range").slider("values", 1));
 
 		}); //]]>
 
-		// $('.range #amount').change(function(){
-		// 	console.log("Changed");
-		// 	console.log($(this).val());
-		// });
-
-		document.getElementById('amount').addEventListener("change", function(){
-			console.log("JS Change");
-			console.log(this);
-		});
 	</script>
 	<!-- //price range (top products) -->
 @endpush
