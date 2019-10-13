@@ -12,6 +12,15 @@ class CartController extends Controller
     {
         return view('site.pages.cart');
 	}
+
+	public function getItems()
+	{
+		return \Response::json([
+			'cart' => Cart::getContent(),
+			'total' => Cart::getSubTotal(),
+			'symbol' => \Config::get('settings')['currency_symbol']
+		], 200);
+	}
 	
 	public function removeItem($id)
 	{

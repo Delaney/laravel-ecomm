@@ -16,44 +16,81 @@
 <script>
 	googles.render({ 'action': '/checkout' });
 	googles.cart.on('add', function(idx, product, isExisting) {
-		console.log(product);
-		
-		let data = {
-			'productId': product._data.id,
-			'qty': 1,
-			'price': product._data.amount,
-			'uid': product._data.uid,
-			'_token': "{{ csrf_token() }}"
-		};
+		// console.log(product);
 
-		$.post('/product/add/cart', data, function(response, status, xhr){
-		}).fail(function() {
-			googles.cart.remove(idx);
-		});
+		if(isExisting){
+			let qty = product.get('quantity');
+			
+			let data = {
+				'id': product._data.id,
+				'qty': qty,
+				'_token': "{{ csrf_token() }}"
+			};
+			$.post(`/product/add/cart/qty`, data, function(response, status, xhr){
+			}).fail(function() {
+				qty--;
+				product.set('quantity', qty);
+			});
+		} else {
+			let data = {
+				'id': product._data.id,
+				'qty': 1,
+				'price': product._data.amount,
+				'_token': "{{ csrf_token() }}"
+			};
+			$.post('/product/add/cart', data, function(response, status, xhr){
+			}).fail(function() {
+				googles.cart.remove(idx);
+			});
+		}
 	});
+	
 	googles.cart.on('remove', function(idx, product) {
 		console.log(product);
 		
 		let data = {
-			'uid': product._data.uid,
+			'id': product._data.id,
 			'_token': "{{ csrf_token() }}"
 		};
 
-		console.log(data);
+		product.on('change', function(key) {
+			console.log("Quantity reduced");
+		});
 
 		$.post('/product/remove/cart', data, function(response, status, xhr){
 		});
 	});
+
+	googles.cart.on('change', function(idx, key, value){
+		console.log(idx);
+		console.log(key);
+		console.log(value);
+	})
 	googles.cart.on('googles_checkout', function (evt) {
+		// evt.preventDefault();
 		var items, len, i;
 
 		if (this.subtotal() > 0) {
 			items = this.items();
-			console.log(items);
+			// console.log(items);
 
 			for (i = 0, len = items.length; i < len; i++) {}
 		}
+
+		// $.get('/cart/items', function(response, status, xhr){
+		// 	console.log(response);
+		// });
+
+		// let cart = "{{ \Cart::getContent() }}";
+		// cart = cart.replace(/&quot;/g, "\"");
+		// console.log(JSON.parse(cart));
 	});
+
+	$(document).ready(function(){
+		// $('.sbmincart-quantity').prop('disabled', true);
+	});
+
+
 </script>
 <!-- //cart-js -->
 <script>

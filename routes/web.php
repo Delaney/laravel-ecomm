@@ -26,10 +26,12 @@ Route::post('/search', 'Site\ProductController@search')->name('search');
 Route::post('/search/price', 'Site\ProductController@searchPriceRange')->name('search.price');
 
 Route::post('/product/add/cart', 'Site\ProductController@addToCart')->name('product.add.cart');
+Route::post('/product/add/cart/qty', 'Site\ProductController@addMoreToCart')->name('product.add.cartQty');
 Route::post('/product/remove/cart', 'Site\ProductController@removeFromCart')->name('product.remove.cart');
 
 
 Route::get('/cart', 'Site\CartController@getCart')->name('checkout.cart');
+Route::get('/cart/items', 'Site\CartController@getItems')->name('checkout.cart.items');
 Route::get('/cart/item/{id}/remove', 'Site\CartController@removeItem')->name('checkout.cart.remove');
 Route::get('/cart/clear', 'Site\CartController@clearCart')->name('checkout.cart.clear');
 

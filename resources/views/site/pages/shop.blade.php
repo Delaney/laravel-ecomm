@@ -59,7 +59,7 @@
 								</li>
 							</ul>
 							<div style="display:block;height:30px;"></div>
-							<form id="price-filter-form" method="POST" action="search/price" style="display:none;">
+							<form id="price-filter-form" method="POST" action="/search/price" style="display:none;">
 								@csrf
 								<input type="text" id="price_min" name="price_min" />
 								<input type="text" id="price_max" name="price_max" />
@@ -177,7 +177,7 @@
 																<input type="hidden" name="googles_item" value="{{ $product->name }}">
 																<input type="hidden" name="amount" value="{{ $product->price }}">
 																<input type="hidden" name="id" value="{{ $product->id }}">
-																<input type="hidden" name="uid" value="{{ uniqid() }}">
+																
 																<input type="hidden" name="slug" value="{{ $product->slug }}">
 																<input type="hidden" name="currency_code" value="{{ config('settings.currency_code') }}">
 																<button type="submit" class="googles-cart pgoogles-cart">
@@ -323,14 +323,20 @@
 					document.querySelector("#amount_max").value = "₦" + ui.values[1];
 					document.querySelector("#price_min").value = ui.values[0];
 					document.querySelector("#price_max").value = ui.values[1];
-					console.log("₦" + ui.values[1]);
+					// console.log("₦" + ui.values[1]);
 				}
 			});
 			$("#slider-range-btn").click(function () {
 				$("#price-filter-form").submit();
-			})
-			console.log($("#slider-range").slider("values", 0));
-			console.log($("#slider-range").slider("values", 1));
+			});
+			$("#amount_min").change(function () {
+				console.log($(this).val());
+				document.querySelector("#price_min").value = $(this).val();
+			});
+			$("#amount_max").change(function () {
+				console.log($(this).val());
+				document.querySelector("#price_max").value = $(this).val();
+			});
 			$("#amount").val("₦" + $("#slider-range").slider("values", 0) + " - ₦" + $("#slider-range").slider("values", 1));
 
 		}); //]]>

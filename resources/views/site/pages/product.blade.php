@@ -151,9 +151,7 @@
 							<div class="color-quality">
 								<div class="color-quality-right">
 									<h5>Quantity :</h5>
-									<select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-																		
-										</select>
+									<input type="text" id="quantity" class="form-control" style="width: 50px;" value="1" />
 								</div>
 							</div>
 							<div class="occasional">
@@ -190,13 +188,14 @@
 							</div>
 							<div class="occasion-cart">
 								<div class="googles single-item singlepage">
-									<form action="#" method="post" class="add-to-cart-form">
+									<form action="#" method="post" class="add-to-cart-form" onsubmit="console.log(event);">
 										<input type="hidden" name="cmd" value="_cart">
 										<input type="hidden" name="add" value="1">
+										<input type="hidden" name="quantity" value="1">
 										<input type="hidden" name="googles_item" value="{{ $product->name }}">
 										<input type="hidden" name="amount" value="{{ $product->price }}">
 										<input type="hidden" name="id" value="{{ $product->id }}">
-										<input type="hidden" name="uid" value="{{ uniqid() }}">
+										
 										<input type="hidden" name="currency_code" value="{{ config('settings.currency_code') }}">
 										<button type="submit" class="googles-cart pgoogles-cart">
 											Add to Cart
@@ -219,7 +218,7 @@
 				<!--/slide-->
 				<div class="slider-img mid-sec mt-lg-5 mt-2 px-lg-5 px-3">
 					<!--//banner-sec-->
-					<h3 class="tittle-w3layouts text-left my-lg-4 my-3">Popular Itemd</h3>
+					<h3 class="tittle-w3layouts text-left my-lg-4 my-3">Popular Items</h3>
 					<div class="mid-slider">
 						<div class="owl-carousel owl-theme row">
 							@for ($i = 0; $i < 6; $i++)
@@ -333,7 +332,10 @@
                 let finalPrice = (Number(extraPrice) + price).toFixed(2);
                 $('#finalPrice').val(finalPrice);
                 $('#productPrice').html(finalPrice);
-            });
+			});
+			$('#quantity').change(function () {
+				document.querySelector('[name="quantity"]').value = $(this).val();
+			})
         });
     </script>
 @endpush

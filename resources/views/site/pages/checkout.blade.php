@@ -24,65 +24,61 @@
 	</div>
 	<!--//banner -->
 
-	<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+	<section class="banner-bottom-wthreelayouts py-lg-5 py-3" id="app">
 		<div class="container">
 			<div class="inner-sec-shop px-lg-4 px-3">
 				<h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
 				<div class="checkout-right">
-					<h4>Your shopping cart contains:
-						<span>{{ \Cart::getTotalQuantity() }} Products</span>
-					</h4>
-					<table class="timetable_sub">
-						<thead>
-							<tr>
-								<th>SL No.</th>
-								<th>Quantity</th>
-								<th>Product Name</th>
+					<checkout-cart></checkout-cart>
+					<!-- <div>
+						<h4>Your shopping cart contains:
+							<span>{{ \Cart::getTotalQuantity() }} Products</span>
+						</h4>
+						<table class="timetable_sub">
+							<thead>
+								<tr>
+									<th>SL No.</th>
+									<th>Quantity</th>
+									<th>Product Name</th>
 
-								<th>Price</th>
-								<th>Remove</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($cartCollection as $key => $item)
-							<tr class="rem1">
-								<td class="invert">1</td>
-								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value">
-												<span>{{ $item->quantity }}</span>
+									<th>Price</th>
+									<th>Remove</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($cartCollection as $key => $item)
+								<tr class="rem1">
+									<td class="invert">1</td>
+									<td class="invert">
+										<div class="quantity">
+											<div class="quantity-select">
+												<div class="entry value-minus">&nbsp;</div>
+												<div class="entry value">
+													<span>{{ $item->quantity }}</span>
+												</div>
+												<div class="entry value-plus active">&nbsp;</div>
 											</div>
-											<div class="entry value-plus active">&nbsp;</div>
 										</div>
-									</div>
-								</td>
-								<td class="invert">{{ $item->name }} </td>
+									</td>
+									<td class="invert">{{ $item->name }} </td>
 
-								<td class="invert">{{ config('settings.currency_symbol') }}{{ $item->price }}</td>
-								<td class="invert">
-									<div class="rem">
-										<div class="close1"> </div>
-									</div>
+									<td class="invert">{{ config('settings.currency_symbol') }}{{ $item->price }}</td>
+									<td class="invert">
+										<div class="rem">
+											<div class="close1"> </div>
+										</div>
 
-								</td>
-							</tr>
-							@endforeach
+									</td>
+								</tr>
+								@endforeach
 
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</div> -->
 				</div>
 				<div class="checkout-left row">
 					<div class="col-md-4 checkout-left-basket">
-						<h4>Continue to basket</h4>
-						<ul>
-							
-							<li>Total
-								<i>-</i>
-								<span>{{ config('settings.currency_symbol') }}{{ \Cart::getSubTotal() }}</span>
-							</li>
-						</ul>
+						
 					</div>
 					<div class="col-md-8 address_form">
 						<h4>Add new Details</h4>
@@ -171,3 +167,8 @@
 	<!--//checkout-->
 	<!--footer -->
 @stop
+
+@push('scripts')
+
+<script type="text/javascript" src="{{ asset('frontend/js/front.js') }}"></script>
+@endpush

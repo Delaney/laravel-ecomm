@@ -35,12 +35,24 @@ class ProductController extends Controller
 	
 	public function addToCart(Request $request)
 	{
-		$product = $this->productRepository->findProductById($request->input('productId'));
-		$options = $request->except('_token', 'productId', 'price', 'qty');
+		$product = $this->productRepository->findProductById($request->input('id'));
+		$options = $request->except('_token', 'id', 'price', 'qty');
 
-		Cart::add(uniqid(), $product->name, $request->input('price'), $request->input('qty'), $options);
+		Cart::add($request->input('id'), $product->name, $request->input('price'), $request->input('qty'), $options);
 
 		// return redirect()->back()->with('message', 'Item added to cart successfully.');
+
+		return Response::json([], 200);
+	}
+
+	public function addMoreToCart(Request $request)
+	{
+		Cart::update($request->input('id'), array(
+			'quantity' => array(
+				'relative' => false,
+				'value' => $request->input('qty'),
+			),
+		));
 
 		return Response::json([], 200);
 	}
@@ -49,9 +61,9 @@ class ProductController extends Controller
 	{
 		$options = $request->except('_token', 'productId', 'price', 'qty');
 
-		Cart::remove($request->input('uid'));
+		Cart::remove($request->input('id'));
 
-		return Response::json(['req' => $request->input('uid')], 200);
+		return Response::json(['req' => $request->input('id')], 200);
 	}
 
 	public function search(Request $request)
