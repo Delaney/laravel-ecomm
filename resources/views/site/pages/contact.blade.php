@@ -7,22 +7,25 @@
 @section('content')
 
 <div class="banner_inner">
-			<div class="services-breadcrumb">
-				<div class="inner_breadcrumb">
+	<div class="services-breadcrumb">
+		<div class="inner_breadcrumb">
 
-					<ul class="short">
-						<li>
-							<a href="{{ '/' }}">Home</a>
-							<i>|</i>
-						</li>
-						<li>Contact Us</li>
-					</ul>
-				</div>
-			</div>
-
+			<ul class="short">
+				<li>
+					<a href="{{ '/' }}">Home</a>
+					<i>|</i>
+				</li>
+				<li>Contact Us</li>
+			</ul>
 		</div>
-		<!--//banner -->
 	</div>
+
+</div>
+<!--//banner -->
+</div>
+
+@include('admin.partials.flash')
+
 <!-- top Products -->
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
 		<div class="container">
@@ -81,21 +84,21 @@
 							<div class="col-md-6 con-left">
 								<div class="form-group">
 									<label class="my-2">Name</label>
-									<input class="form-control" type="text" name="Name" placeholder="" required="">
+									<input class="form-control" type="text" name="name" placeholder="" required="">
 								</div>
 								<div class="form-group">
 									<label>Email</label>
-									<input class="form-control" type="email" name="Email" placeholder="" required="">
+									<input class="form-control" type="email" name="email" placeholder="" required="">
 								</div>
 								<div class="form-group">
 									<label class="my-2">Phone</label>
-									<input class="form-control" type="text" name="Phone" placeholder="">
+									<input class="form-control" type="text" name="phone" placeholder="">
 								</div>
 							</div>
 							<div class="col-md-6 con-right">
 								<div class="form-group">
 									<label>Message</label>
-									<textarea id="textarea" placeholder="" required=""></textarea>
+									<textarea id="textarea" name="message" placeholder="" required=""></textarea>
 								</div>
 								<input class="form-control" type="submit" value="Submit">
 

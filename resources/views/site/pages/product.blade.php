@@ -154,7 +154,7 @@
 									<input type="text" id="quantity" class="form-control" style="width: 50px;" value="1" />
 								</div>
 							</div>
-							<div class="occasional">
+							<!-- <div class="occasional">
 								<h5>Types :</h5>
 								@foreach($attributes as $attribute)
 									@php $attributeCheck = in_array($attribute->id, $product->attributes->pluck('attribute_id')->toArray()) @endphp
@@ -167,7 +167,7 @@
 													@if ($attributeValue->attribute_id == $attribute->id)
 														<option
 															data-price="{{ $attributeValue->price }}"
-															value="{{ $attributeValue->value }}"> {{ ucwords($attributeValue->value . ' +'. $attributeValue->price) }}
+															value="{{ $attributeValue->value }}"> {{ ucwords($attributeValue->value) }}
 														</option>
 													@endif
 												@endforeach
@@ -175,17 +175,7 @@
 										</dd>
 									@endif
 								@endforeach
-								<!-- <div class="colr ert">
-									<label class="radio"><input type="radio" name="radio" checked=""><i></i> Irayz Butterfly(Black)</label>
-								</div>
-								<div class="colr">
-									<label class="radio"><input type="radio" name="radio"><i></i> Irayz Butterfly (Grey)</label>
-								</div>
-								<div class="colr">
-									<label class="radio"><input type="radio" name="radio"><i></i> Irayz Butterfly (white)</label>
-								</div>
-								<div class="clearfix"> </div> -->
-							</div>
+							</div> -->
 							<div class="occasion-cart">
 								<div class="googles single-item singlepage">
 									<form action="#" method="post" class="add-to-cart-form" onsubmit="console.log(event);">

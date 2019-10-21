@@ -34,7 +34,7 @@
 		} else {
 			let data = {
 				'id': product._data.id,
-				'qty': 1,
+				'qty': product._data.quantity,
 				'price': product._data.amount,
 				'_token': "{{ csrf_token() }}"
 			};

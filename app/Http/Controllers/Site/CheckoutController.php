@@ -36,7 +36,7 @@ class CheckoutController extends Controller
         $order = $this->orderRepository->storeOrderDetails($request->all());
 
         if ($order) {
-			Cookie::queue('order', $order->order_number, 100);
+			Cookie::queue('order', $order->order_number, 10);
 			return Paystack::getAuthorizationUrl()->redirectNow();
 		}
 	}

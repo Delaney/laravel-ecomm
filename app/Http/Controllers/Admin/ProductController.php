@@ -58,8 +58,9 @@ class ProductController extends BaseController
 		if (!$product) {
 			return $this->responseRedirectBack('Error occurred while creating product.', 'error', true, true);
 		}
-		$route = 'admin/products/edit/' . $product->id;
-		return $this->responseRedirect($route, 'Product added successfully' ,'success',false, false);
+		$route = 'admin.products.edit';
+		$attr = ['id' => $product->id];
+		return $this->responseRedirect($route, 'Product added successfully' ,'success',false, false, $attr);
 	}
 
 	public function edit($id)
@@ -82,6 +83,15 @@ class ProductController extends BaseController
 			return $this->responseRedirectBack('Error occurred while updating product.', 'error', true, true);
 		}
 		return $this->responseRedirect('admin.products.index', 'Product updated successfully' ,'success',false, false);
+	}
+
+	public function delete($id)
+	{
+		$product = Product::find($id);
+		$attrs = $product->attributes();
+		$images = $product->images();
+
+		return compact('product', 'attrs', 'images');
 	}
 
 	public function featured($id)
