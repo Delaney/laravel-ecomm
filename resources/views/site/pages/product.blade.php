@@ -42,6 +42,13 @@
 									<span class="price_amount">{{ $product->price }}</span>
 								</span>
 							</p>
+							@if(!$product->status)
+							<p>
+								<span class="item_price">
+									<span class="price_amount">In Stock: {{ $product->quantity }}</span>
+								</span>
+							</p>
+							@endif
 							<div class="description">
 								<h5>{{ $product->description }}</h5>
 							
@@ -51,7 +58,7 @@
 							<div class="color-quality">
 								<div class="color-quality-right">
 									<h5>Quantity :</h5>
-									<input type="number" id="quantity" class="form-control" style="width: 50px;" value="{{ $product->quantity }}" min="{{ $product->quantity }}"/>
+									<input type="number" id="quantity" class="form-control" style="width: 80px;" value="1" max="{{ $product->quantity }}"/>
 								</div>
 							</div>
 							<div class="occasional">

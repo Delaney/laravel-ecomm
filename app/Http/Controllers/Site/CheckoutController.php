@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Product;
 use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -39,6 +40,7 @@ class CheckoutController extends Controller
 			Cookie::queue('order', $order->order_number, 10);
 			return Paystack::getAuthorizationUrl()->redirectNow();
 		}
+		return $items;
 	}
 	
 	public function handleGatewayCallback()
@@ -51,6 +53,16 @@ class CheckoutController extends Controller
 		$order->payment_method = 'Paystack -'. $paymentDetails['data']['channel'];
 		$order->save();
 		$order->get();
+
+		$items = $order->items();
+		foreach ($items as $item){
+			$product = Product::find($item->product_id);
+			$product->quantity -= $item->quantity;
+			if ($product->quantity == 0){
+				$product->status = 1;
+			}
+			$product->save();
+		}
 		
 		Cart::clear();
 

@@ -13,10 +13,18 @@
 <!--//search jQuery-->
 <!-- cart-js -->
 <script src="{{ asset('frontend/js/minicart.js') }}"></script>
+
+<!-- <div class="alert alert-warning alert-dismissible fade" id="qty_alert" role="alert">
+	Quantity must not exceed stock quantity.
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	<span aria-hidden="true">&times;</span>
+	</button>
+</div> -->
+
 <script>
 	googles.render({ 'action': '/checkout' });
 	googles.cart.on('add', function(idx, product, isExisting) {
-		console.log(product);
+		// console.log(product);
 
 		if(isExisting){
 			let qty = product.get('quantity');
@@ -28,7 +36,10 @@
 				'_token': "{{ csrf_token() }}"
 			};
 			$.post(`/product/add/cart/qty`, data, function(response, status, xhr){
-			}).fail(function() {
+			}).fail(function(response, status) {
+				// if (response.responseJSON.qty){
+				// 	$('#qty_alert').alert();
+				// }
 				qty--;
 				product.set('quantity', qty);
 			});
@@ -41,7 +52,10 @@
 				'_token': "{{ csrf_token() }}"
 			};
 			$.post('/product/add/cart', data, function(response, status, xhr){
-			}).fail(function() {
+			}).fail(function(response, status) {
+				// if (response.responseJSON.qty){
+				// 	$('#qty_alert').alert();
+				// }
 				googles.cart.remove(idx);
 			});
 		}
@@ -78,14 +92,6 @@
 
 			for (i = 0, len = items.length; i < len; i++) {}
 		}
-
-		// $.get('/cart/items', function(response, status, xhr){
-		// 	console.log(response);
-		// });
-
-		// let cart = "{{ \Cart::getContent() }}";
-		// cart = cart.replace(/&quot;/g, "\"");
-		// console.log(JSON.parse(cart));
 	});
 
 	$(document).ready(function(){

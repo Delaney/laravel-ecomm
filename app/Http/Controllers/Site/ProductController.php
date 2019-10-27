@@ -36,6 +36,9 @@ class ProductController extends Controller
 	public function addToCart(Request $request)
 	{
 		$product = $this->productRepository->findProductById($request->input('id'));
+		if ($product->quantity < $request->input('qty')){
+			return Response::json(['qty' => true], 400);
+		}
 		$options = $request->except('_token', 'id', 'price', 'qty', 'attributes');
 
 		if (empty($request->input('attributes')))
