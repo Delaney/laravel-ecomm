@@ -10,6 +10,8 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\StoreProductFormRequest;
 use App\Models\Product;
 
+use DB;
+
 use Response;
 
 class ProductController extends BaseController
@@ -91,7 +93,10 @@ class ProductController extends BaseController
 		$attrs = $product->attributes();
 		$images = $product->images();
 
-		return compact('product', 'attrs', 'images');
+		DB::table('product_categories')->where('product_id', '=', $id)->delete();
+
+		$product->delete();
+		return $this->responseRedirect('admin.products.index', 'Product deleted successfully' ,'success',false, false);
 	}
 
 	public function featured($id)

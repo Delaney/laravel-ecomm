@@ -74,4 +74,14 @@ class Product extends Model
 	{
 		return $this->belongsToMany(Category::class, 'product_categories', 'product_id', 'category_id');
 	}
+
+	public static function boot() {
+        parent::boot();
+
+        static::deleting(function($product) { // before delete() method call this
+			$product->images()->delete();
+			$product->attributes()->delete();
+			// do the rest of the cleanup...
+        });
+    }
 }

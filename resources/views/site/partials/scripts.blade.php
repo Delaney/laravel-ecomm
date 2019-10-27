@@ -16,7 +16,7 @@
 <script>
 	googles.render({ 'action': '/checkout' });
 	googles.cart.on('add', function(idx, product, isExisting) {
-		// console.log(product);
+		console.log(product);
 
 		if(isExisting){
 			let qty = product.get('quantity');
@@ -24,6 +24,7 @@
 			let data = {
 				'id': product._data.id,
 				'qty': qty,
+				'attributes': JSON.parse(product._data.attributes),
 				'_token': "{{ csrf_token() }}"
 			};
 			$.post(`/product/add/cart/qty`, data, function(response, status, xhr){
@@ -35,6 +36,7 @@
 			let data = {
 				'id': product._data.id,
 				'qty': product._data.quantity,
+				'attributes': product._data.attributes,
 				'price': product._data.amount,
 				'_token': "{{ csrf_token() }}"
 			};

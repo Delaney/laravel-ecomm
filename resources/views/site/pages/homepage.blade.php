@@ -200,61 +200,125 @@
 					</div>
 				</div>				 -->
 
-				@for ($i = 0; $i < 4; $i++)
-					<div class="col-md-3 product-men women_two">
-						<div class="product-googles-info googles">
-							<div class="men-pro-item">
-								<div class="men-thumb-item">
-									@if ($products[$i]->main == NULL)
-									<img src="{{ asset('default/product.png') }}" class="img-fluid" alt="">
-									@else
-									<img src="{{ asset('storage/'.$products[$i]->main) }}" class="img-fluid" alt="">
-									@endif
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="{{ 'product/'.$products[$i]->slug }}" class="link-product-add-cart">Details</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-								</div>
-								<div class="item-info-product">
-
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<h4>
-													<a href="{{ 'product/'.$products[$i]->slug }}">{{ $products[$i]->name }}</a>
-												</h4>
-												<div class="grid-price mt-2">
-													<span class="money ">{{ config('settings.currency_symbol') }}{{ $products[$i]->price }}</span>
+				@if ($products)
+					@if (count($products) >= 4)
+						@for ($i = 0; $i < 4; $i++)
+							<div class="col-md-3 product-men women_two">
+								<div class="product-googles-info googles">
+									<div class="men-pro-item">
+										<div class="men-thumb-item">
+											@if ($products[$i]->main == NULL)
+											<img src="{{ asset('default/product.png') }}" class="img-fluid" alt="">
+											@else
+											<img src="{{ asset('storage/'.$products[$i]->main) }}" class="img-fluid" alt="">
+											@endif
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+													<a href="{{ 'product/'.$products[$i]->slug }}" class="link-product-add-cart">Details</a>
 												</div>
 											</div>
-											
+											<span class="product-new-top">New</span>
 										</div>
-										<div class="googles single-item hvr-outline-out">
-											
-											<form action="#" method="post" class="add-to-cart-form">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="{{ $products[$i]->name }}">
-												<input type="hidden" name="amount" value="{{ $products[$i]->price }}">
-												<input type="hidden" name="id" value="{{ $products[$i]->id }}">
-												
-												<input type="hidden" name="slug" value="{{ $products[$i]->slug }}">
-												<input type="hidden" name="currency_code" value="{{ config('settings.currency_code') }}">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
-											</form>
+										<div class="item-info-product">
 
+											<div class="info-product-price">
+												<div class="grid_meta">
+													<div class="product_price">
+														<h4>
+															<a href="{{ 'product/'.$products[$i]->slug }}">{{ $products[$i]->name }}</a>
+														</h4>
+														<div class="grid-price mt-2">
+															<span class="money ">{{ config('settings.currency_symbol') }}{{ $products[$i]->price }}</span>
+														</div>
+													</div>
+													
+												</div>
+												<div class="googles single-item hvr-outline-out">
+													
+													<form action="#" method="post" class="add-to-cart-form">
+														<input type="hidden" name="cmd" value="_cart">
+														<input type="hidden" name="add" value="1">
+														<input type="hidden" name="googles_item" value="{{ $products[$i]->name }}">
+														<input type="hidden" name="amount" value="{{ $products[$i]->price }}">
+														<input type="hidden" name="id" value="{{ $products[$i]->id }}">
+														
+														<input type="hidden" name="slug" value="{{ $products[$i]->slug }}">
+														<input type="hidden" name="currency_code" value="{{ config('settings.currency_code') }}">
+														<button type="submit" class="googles-cart pgoogles-cart">
+															<i class="fas fa-cart-plus"></i>
+														</button>
+													</form>
+
+												</div>
+											</div>
+											<div class="clearfix"></div>
 										</div>
 									</div>
-									<div class="clearfix"></div>
 								</div>
 							</div>
-						</div>
+						@endfor
+					@else
+						@for ($i = 0; $i < count($products); $i++)
+							<div class="col-md-3 product-men women_two">
+								<div class="product-googles-info googles">
+									<div class="men-pro-item">
+										<div class="men-thumb-item">
+											@if ($products[$i]->main == NULL)
+											<img src="{{ asset('default/product.png') }}" class="img-fluid" alt="">
+											@else
+											<img src="{{ asset('storage/'.$products[$i]->main) }}" class="img-fluid" alt="">
+											@endif
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+													<a href="{{ 'product/'.$products[$i]->slug }}" class="link-product-add-cart">Details</a>
+												</div>
+											</div>
+											<span class="product-new-top">New</span>
+										</div>
+										<div class="item-info-product">
+
+											<div class="info-product-price">
+												<div class="grid_meta">
+													<div class="product_price">
+														<h4>
+															<a href="{{ 'product/'.$products[$i]->slug }}">{{ $products[$i]->name }}</a>
+														</h4>
+														<div class="grid-price mt-2">
+															<span class="money ">{{ config('settings.currency_symbol') }}{{ $products[$i]->price }}</span>
+														</div>
+													</div>
+													
+												</div>
+												<div class="googles single-item hvr-outline-out">
+													
+													<form action="#" method="post" class="add-to-cart-form">
+														<input type="hidden" name="cmd" value="_cart">
+														<input type="hidden" name="add" value="1">
+														<input type="hidden" name="googles_item" value="{{ $products[$i]->name }}">
+														<input type="hidden" name="amount" value="{{ $products[$i]->price }}">
+														<input type="hidden" name="id" value="{{ $products[$i]->id }}">
+														
+														<input type="hidden" name="slug" value="{{ $products[$i]->slug }}">
+														<input type="hidden" name="currency_code" value="{{ config('settings.currency_code') }}">
+														<button type="submit" class="googles-cart pgoogles-cart">
+															<i class="fas fa-cart-plus"></i>
+														</button>
+													</form>
+
+												</div>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endfor
+					@endif
+				@else
+					<div class="col-md-12">
+						<h2>No Products Available</h2>
 					</div>
-				@endfor
+				@endif
 			</div>
 			<!-- //womens -->
 			<!-- /mens -->

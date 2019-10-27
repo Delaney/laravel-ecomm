@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findProductBySlug($slug);
 		$attributes = $this->attributeRepository->listAttributes();
-		$images = ProductImage::where('product_id', $product->id);
+		$images = ProductImage::where('product_id', $product->id)->get();
 		$featured = Product::where('featured', 1)->get();
 
 		return view('site.pages.product', compact('product', 'attributes', 'images', 'featured'));
@@ -36,9 +36,15 @@ class ProductController extends Controller
 	public function addToCart(Request $request)
 	{
 		$product = $this->productRepository->findProductById($request->input('id'));
-		$options = $request->except('_token', 'id', 'price', 'qty');
+		$options = $request->except('_token', 'id', 'price', 'qty', 'attributes');
 
-		Cart::add($request->input('id'), $product->name, $request->input('price'), $request->input('qty'), $options);
+		if (empty($request->input('attributes')))
+		{
+			Cart::add($request->input('id'), $product->name, $request->input('price'), $request->input('qty'), $options);
+		} else {
+			$attr = json_decode($request->input('attributes'), true);
+			Cart::add($request->input('id'), $product->name, $request->input('price'), $request->input('qty'), $attr, $options);
+		}
 
 		// return redirect()->back()->with('message', 'Item added to cart successfully.');
 

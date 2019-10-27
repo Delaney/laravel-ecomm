@@ -15,7 +15,7 @@
 						v-model="value"
 					/>
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label class="control-label" for="price">Price</label>
 					<input
 						class="form-control"
@@ -25,7 +25,7 @@
 						name="price"
 						v-model="price"
 					/>
-				</div>
+				</div> -->
 			</div>
 			<div class="tile-footer">
 				<div class="row d-print-none mt-2">

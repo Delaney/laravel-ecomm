@@ -18,8 +18,11 @@ class CategoryController extends Controller
     public function show($slug)
     {
 		$category = $this->categoryRepository->findBySlug($slug);
-		// $category = Category::where('slug', $slug)->first();
 		$featured = Product::where('featured', 1)->get();
+
+		if(empty($category)){
+			return view('site.pages.404');
+		}
 		
         return view('site.pages.category', compact('category', 'featured'));
     }
