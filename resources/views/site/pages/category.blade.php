@@ -90,7 +90,9 @@
 															<a href="{{ '/product/'.$product->slug }}" class="link-product-add-cart">Quick View</a>
 														</div>
 													</div>
-													<span class="product-new-top">New</span>
+													@if ($product->status)
+													<span class="product-new-top">Soldout</span>
+													@endif
 												</div>
 												<div class="item-info-product">
 													<div class="info-product-price">
@@ -105,6 +107,7 @@
 															</div>
 															
 														</div>
+														@if(!$product->status)
 														<div class="googles single-item hvr-outline-out">
 															<form action="#" method="post">
 																<input type="hidden" name="cmd" value="_cart">
@@ -121,6 +124,7 @@
 															</form>
 
 														</div>
+														@endif
 													</div>
 													<div class="clearfix"></div>
 												</div>
@@ -161,7 +165,9 @@
 																<a href="{{ 'product/'.$featured[$i]->slug }}" class="link-product-add-cart">Quick View</a>
 															</div>
 														</div>
-														<span class="product-new-top">New</span>
+														@if ($featured[$i]->status)
+														<span class="product-new-top">Soldout</span>
+														@endif
 													</div>
 													<div class="item-info-product">
 
@@ -203,6 +209,7 @@
 																	</li>
 																</ul>
 															</div>
+															@if (!$featured[$i]->status)
 															<div class="googles single-item hvr-outline-out">
 																<form action="#" method="post">
 																	<input type="hidden" name="cmd" value="_cart">
@@ -219,6 +226,7 @@
 																</form>
 
 															</div>
+															@endif
 														</div>
 
 													</div>

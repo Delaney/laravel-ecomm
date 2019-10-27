@@ -29,7 +29,13 @@
 							</div>
 						</div>
 						<div class="col-lg-8 single-right-left simpleCart_shelfItem">
-							<h3>{{ $product->name }}</h3>
+							<h3>
+								{{ $product->name }}
+								@if($product->status)
+								<br>
+								<small style="font-size: 50%; background: #ff4e00; color: #fff; padding: 5px;">Sold out!</small>
+								@endif
+							</h3>
 							<p>
 								<span class="item_price">
 									{{ config('settings.currency_symbol') }}
@@ -41,6 +47,7 @@
 							
 							</div>
 							
+							@if(!$product->status)
 							<div class="color-quality">
 								<div class="color-quality-right">
 									<h5>Quantity :</h5>
@@ -88,6 +95,7 @@
 
 								</div>
 							</div>
+							@endif
 							
 						</div>
 						<div class="clearfix"> </div>
@@ -126,7 +134,9 @@
 															<a href="{{ $featured[$i]->slug }}" class="link-product-add-cart">Quick View</a>
 														</div>
 													</div>
-													<span class="product-new-top">New</span>
+													@if ($featured[$i]->status)
+													<span class="product-new-top">Soldout</span>
+													@endif
 												</div>
 												<div class="item-info-product">
 

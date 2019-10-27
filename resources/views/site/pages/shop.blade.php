@@ -66,76 +66,12 @@
 							</form>
 							<button id="slider-range-btn" class="btn btn-warning">Filter</button>
 						</div>
-						<!-- //price range -->
-						
-						<!-- // preference -->
-						<!-- discounts -->
-						
-						<!-- //discounts -->
-						<!-- reviews -->
-
-						<!-- //reviews -->
-						<!-- deals -->
-						<!-- <div class="deal-leftmk left-side">
-							<h3 class="agileits-sear-head">Special Deals</h3>
-							<div class="special-sec1">
-								<div class="img-deals">
-									<img src="{{ 'frontend/images/s1.jpeg' }}" alt="">
-								</div>
-								<div class="img-deal1">
-									<h3>Farenheit (Grey)</h3>
-									<a href="single.php">NGN575.00</a>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="special-sec1">
-								<div class="col-xs-4 img-deals">
-									<img src="{{ 'frontend/images/s2.jpeg' }}" alt="">
-								</div>
-								<div class="col-xs-8 img-deal1">
-									<h3>Opium (Grey)</h3>
-									<a href="single.php">NGN325.00</a>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="special-sec1">
-									<div class="col-xs-4 img-deals">
-										<img src="{{ 'frontend/images/m2.jpg' }}" alt="">
-									</div>
-									<div class="col-xs-8 img-deal1">
-										<h3>Azmani Round</h3>
-										<a href="single.php">NGN725.00</a>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="special-sec1">
-										<div class="col-xs-4 img-deals">
-											<img src="{{ 'frontend/images/m4.jpg' }}" alt="">
-										</div>
-										<div class="col-xs-8 img-deal1">
-											<h3>Farenheit Oval</h3>
-											<a href="single.html">NGN325.00</a>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-						</div> -->
-						<!-- //deals -->
 					</div>
 					<!-- //product left -->
 					<!--/product right-->
 					<div class="left-ads-display col-lg-9">
 						<div class="wrapper_top_shop">
-							<!-- <div class="row">
-								<div class="col-md-6 shop_left">
-									<img src="{{ 'frontend/images/banner3.jpeg' }}" alt="">
-									<h6>40% off</h6>
-								</div>
-								<div class="col-md-6 shop_right">
-									<img src="{{ 'frontend/images/banner4.jpeg' }}" alt="">
-									<h6>50% off</h6>
-								</div>
-					
-							</div> -->
+							<
 							
 							
 								<div class="row">
@@ -155,7 +91,9 @@
 															<a href="{{ 'product/'.$product->slug }}" class="link-product-add-cart">Quick View</a>
 														</div>
 													</div>
-													<span class="product-new-top">New</span>
+													@if ($product->status)
+													<span class="product-new-top">Soldout</span>
+													@endif
 												</div>
 												<div class="item-info-product">
 													<div class="info-product-price">
@@ -170,6 +108,7 @@
 															</div>
 															
 														</div>
+														@if(!$product->status)
 														<div class="googles single-item hvr-outline-out">
 															<form action="#" method="post">
 																<input type="hidden" name="cmd" value="_cart">
@@ -186,6 +125,7 @@
 															</form>
 
 														</div>
+														@endif
 													</div>
 													<div class="clearfix"></div>
 												</div>
@@ -224,7 +164,9 @@
 																<a href="{{ 'product/'.$featured[$i]->slug }}" class="link-product-add-cart">Quick View</a>
 															</div>
 														</div>
-														<span class="product-new-top">New</span>
+														@if ($featured[$i]->status)
+														<span class="product-new-top">Soldout</span>
+														@endif
 													</div>
 													<div class="item-info-product">
 
@@ -266,6 +208,7 @@
 																	</li>
 																</ul>
 															</div>
+															@if (!$featured[$i]->status)
 															<div class="googles single-item hvr-outline-out">
 																<form action="#" method="post">
 																	<input type="hidden" name="cmd" value="_cart">
@@ -282,6 +225,7 @@
 																</form>
 
 															</div>
+															@endif
 														</div>
 
 													</div>

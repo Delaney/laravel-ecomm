@@ -167,7 +167,7 @@
                                                    id="status"
                                                    name="status"
                                                    {{ $product->status == 1 ? 'checked' : '' }}
-                                                />Status
+                                                />Sold Out
                                         </label>
                                     </div>
                                 </div>

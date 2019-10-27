@@ -157,7 +157,7 @@
                                                    type="checkbox"
                                                    id="status"
                                                    name="status"
-                                                />Status
+                                                />Sold Out
                                         </label>
                                     </div>
                                 </div>
