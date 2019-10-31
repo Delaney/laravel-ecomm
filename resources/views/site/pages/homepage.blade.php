@@ -79,7 +79,7 @@
 													<a href="{{ 'product/'.$products[$i]->slug }}" class="link-product-add-cart">Details</a>
 												</div>
 											</div>
-											@if ($product->status)
+											@if ($products[$i]->status)
 											<span class="product-new-top">Soldout</span>
 											@endif
 										</div>
@@ -97,7 +97,7 @@
 													</div>
 													
 												</div>
-												@if (!$product->status)
+												@if (!$products[$i]->status)
 												<div class="googles single-item hvr-outline-out">
 													
 													<form action="#" method="post" class="add-to-cart-form">

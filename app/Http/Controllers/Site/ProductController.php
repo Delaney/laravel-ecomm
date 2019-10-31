@@ -37,7 +37,15 @@ class ProductController extends Controller
 	{
 		$product = $this->productRepository->findProductById($request->input('id'));
 		if ($product->quantity < $request->input('qty')){
-			return Response::json(['qty' => true], 400);
+			return Response::json([
+				'qty' => true,
+				'max' => $product->quantity
+			], 406);
+		} elseif ($product->quantity < $request->input('current')){
+			return Response::json([
+				'qty' => true,
+				'max' => $product->quantity
+			], 406);
 		}
 		$options = $request->except('_token', 'id', 'price', 'qty', 'attributes');
 
@@ -56,12 +64,25 @@ class ProductController extends Controller
 
 	public function addMoreToCart(Request $request)
 	{
-		Cart::update($request->input('id'), array(
-			'quantity' => array(
-				'relative' => false,
-				'value' => $request->input('qty'),
-			),
-		));
+		$product = $this->productRepository->findProductById($request->input('id'));
+		if ($product->quantity < $request->input('qty')){
+			return Response::json([
+				'qty' => true,
+				'max' => $product->quantity
+			], 406);
+		} elseif ($product->quantity < $request->input('current')){
+			return Response::json([
+				'qty' => true,
+				'max' => $product->quantity
+			], 406);
+		} else {
+			Cart::update($request->input('id'), array(
+				'quantity' => array(
+					'relative' => false,
+					'value' => $request->input('qty'),
+				),
+			));
+		}
 
 		return Response::json([], 200);
 	}

@@ -29,6 +29,9 @@ class CheckoutController extends Controller
     public function getCheckout()
     {
 		$cartCollection = Cart::getContent();
+		foreach ($cartCollection as $item){
+			// return $item;
+		}
 		return view('site.pages.checkout', compact('cartCollection'));
     }
 
@@ -50,7 +53,7 @@ class CheckoutController extends Controller
 		$order = Order::where('order_number', Cookie::get('order'))->first();
 		$order->status = 'processing';
 		$order->payment_status = 1;
-		$order->payment_method = 'Paystack -'. $paymentDetails['data']['channel'];
+		$order->payment_method = 'Paystack - '. $paymentDetails['data']['channel'];
 		$order->save();
 		$order->get();
 

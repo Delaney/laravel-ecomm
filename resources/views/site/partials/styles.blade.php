@@ -9,6 +9,7 @@
 
 <link href="{{ asset('frontend/css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
 <link href="{{ asset('frontend/css/login_overlay.css') }}" rel='stylesheet' type='text/css' />
+<link href="{{ asset('frontend/css/sweetalert2.min.css') }}" rel='stylesheet' type='text/css' />
 <link href="{{ asset('frontend/css/style6.css') }}" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="{{ asset('frontend/css/shop.css') }}" type="text/css" />
 <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.css') }}" type="text/css" media="all">

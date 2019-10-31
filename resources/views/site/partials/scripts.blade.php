@@ -10,6 +10,7 @@
 <script src="{{ asset('frontend/js/modernizr-2.6.2.min.js') }}"></script>
 <script src="{{ asset('frontend/js/classie-search.js') }}"></script>
 <script src="{{ asset('frontend/js/demo1-search.js') }}"></script>
+<script src="{{ asset('frontend/js/sweetalert2.all.min.js') }}"></script>
 <!--//search jQuery-->
 <!-- cart-js -->
 <script src="{{ asset('frontend/js/minicart.js') }}"></script>
@@ -28,20 +29,32 @@
 
 		if(isExisting){
 			let qty = product.get('quantity');
+			let attr = product._data.attributes ? product._data.attributes : "{}";
 			
 			let data = {
 				'id': product._data.id,
 				'qty': qty,
-				'attributes': JSON.parse(product._data.attributes),
-				'_token': "{{ csrf_token() }}"
+				'attributes': JSON.parse(attr),
+				'current': product._data.quantity,
+				'_token': "{{ csrf_token() }}",
 			};
 			$.post(`/product/add/cart/qty`, data, function(response, status, xhr){
 			}).fail(function(response, status) {
-				// if (response.responseJSON.qty){
-				// 	$('#qty_alert').alert();
-				// }
+				if (response.responseJSON.qty){
+					Swal.fire({
+						title: 'Oops!',
+						text: "Your cart quantity cannot exceed stock quantity.",
+						type: 'error',
+						heightAuto: false,
+						confirmButtonText: 'OK',
+						timer: 3000,
+						onOpen: function(){
+							$('#staplesbmincart .sbmincart-closer').click();
+						}
+					});
+				}
 				qty--;
-				product.set('quantity', qty);
+				product.set('quantity', response.responseJSON.max);
 			});
 		} else {
 			let data = {
@@ -49,20 +62,18 @@
 				'qty': product._data.quantity,
 				'attributes': product._data.attributes,
 				'price': product._data.amount,
+				'current': product._data.quantity,
 				'_token': "{{ csrf_token() }}"
 			};
 			$.post('/product/add/cart', data, function(response, status, xhr){
 			}).fail(function(response, status) {
-				// if (response.responseJSON.qty){
-				// 	$('#qty_alert').alert();
-				// }
 				googles.cart.remove(idx);
 			});
 		}
 	});
 	
 	googles.cart.on('remove', function(idx, product) {
-		console.log(product);
+		// console.log(product);
 		
 		let data = {
 			'id': product._data.id,
@@ -70,7 +81,7 @@
 		};
 
 		product.on('change', function(key) {
-			console.log("Quantity reduced");
+			// console.log("Quantity reduced");
 		});
 
 		$.post('/product/remove/cart', data, function(response, status, xhr){
@@ -78,9 +89,9 @@
 	});
 
 	googles.cart.on('change', function(idx, key, value){
-		console.log(idx);
-		console.log(key);
-		console.log(value);
+		// console.log(idx);
+		// console.log(key);
+		// console.log(value);
 	})
 	googles.cart.on('googles_checkout', function (evt) {
 		// evt.preventDefault();

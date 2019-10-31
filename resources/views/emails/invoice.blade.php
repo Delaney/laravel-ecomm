@@ -33,9 +33,9 @@
 							<div class="col-4">
 								<b>Order ID:</b> {{ $order->order_number }}<br>
 								<b>Amount:</b> {{ config('settings.currency_symbol') }}{{ round($order->grand_total, 2) }}<br>
-								<b>Payment Method:</b> {{ $order->payment_method }}<br>
+								<b>Payment Method:</b> {{ ucwords($order->payment_method) }}<br>
 								<b>Payment Status:</b> {{ $order->payment_status == 1 ? 'Completed' : 'Not Completed' }}<br>
-								<b>Order Status:</b> {{ $order->status }}<br>
+								<b>Order Status:</b> {{ ucwords($order->status) }}<br>
 							</div>
 						</div>
 						<div class="row">
@@ -43,7 +43,6 @@
 								<table class="table table-striped">
 									<thead>
 									<tr>
-										<th>Qty</th>
 										<th>Product</th>
 										<th>SKU #</th>
 										<th>Qty</th>
@@ -53,7 +52,6 @@
 									<tbody>
 										@foreach($order->items as $item)
 											<tr>
-												<td>{{ $item->id }}</td>
 												<td>{{ $item->product->name }}</td>
 												<td>{{ $item->product->sku }}</td>
 												<td>{{ $item->quantity }}</td>
@@ -69,10 +67,5 @@
 			</div>
 		</div>
 	</main>
-	<script src="{{ asset('backend/js/jquery-3.2.1.min.js') }}"></script>
-	<script src="{{ asset('backend/js/popper.min.js') }}"></script>
-	<script src="{{ asset('backend/js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('backend/js/main.js') }}"></script>
-	<script src="{{ asset('backend/js/plugins/pace.min.js') }}"></script>
 </body>
 </html>
